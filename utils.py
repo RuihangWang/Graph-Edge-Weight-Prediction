@@ -9,15 +9,20 @@ def leave_out_n(G, n):
     """
     G_n = G.copy()
     running = True
-    len_G_edges = len(G.edges())
+    target = len(G.edges()) * (1 - n / 100)
     len_G_n_edges = len(G_n.edges())
+
+    all_edges=[]
+    for (u, v) in G.edges():
+        all_edges.append((u,v))
+    slice = random.sample(all_edges,len(all_edges))
+
     while (running):
-        for (u, v) in G.edges():
-            if (len(G_n.in_edges(u)) + len(G_n.out_edges(u))) > 1 and (len(G_n.in_edges(v)) + len(G_n.out_edges(v))):
-                if G_n.has_edge(u, v) and random.random() <= n / 100:
-                    G_n.remove_edge(u,v)
-                    len_G_n_edges -= 1
-                if (len_G_edges * (1 - n / 100)) >= len_G_n_edges:
+        for (u, v) in slice:
+            if G_n.has_edge(u, v) and (len(G_n.in_edges(u)) >=1 or len(G_n.out_edges(u)) >= 2) and (len(G_n.in_edges(v)) >=2 or len(G_n.out_edges(v)) >= 1):
+                G_n.remove_edge(u,v)
+                len_G_n_edges -= 1
+                if len_G_n_edges <= target:
                     running=False
                     break
     return  G_n

@@ -15,10 +15,10 @@ import fairness_goodness_computation as FG
 
 G = nx.DiGraph()
 
-filenames = ['OTCNet.csv', 'RFAnet.csv', 'BTCAlphaNet.csv']
-filename = filenames[2]
+filenames = ['OTCNet', 'RFAnet', 'BTCAlphaNet', 'EpinionNetSignedNet', 'WikiSignedNet']
+filename = filenames[3]
 
-f = open(filename, "r")
+f = open('./CSV/' + filename +'.csv', "r")
 for l in f:
     ls = l.strip().split(",")
     if float(ls[2]) >= 0:
@@ -26,15 +26,24 @@ for l in f:
     else:
         w = 0
     G.add_edge(ls[0], ls[1], weight=float(ls[2]), signed_weight=w)
+
 f.close()
 
-
-percentage = list(range(1, 91, 10))
+percentage = list(range(10, 91, 10))
 error_FG = []
 error_PR = []
 
 for step,n in enumerate(percentage):
     G_n = leave_out_n(G, n)
+    print('G_n')
+
+    """
+        PageRank
+    """
+    PR = nx.pagerank(G_n, weight='signed_weight')
+    error = pagerank_predict_weight(G, G_n, PR)
+    error_PR.append(error)
+    print('PR',error)
 
     """
         Fairness and Goodness
@@ -43,13 +52,8 @@ for step,n in enumerate(percentage):
     error = FG.FG_predict_weight(G, G_n, fairness, goodness)
     error_FG.append(error)
 
+    print('FG',error)
 
-    """
-        PageRank
-    """
-    PR = nx.pagerank(G_n, weight='signed_weight')
-    error = pagerank_predict_weight(G, G_n, PR)
-    error_PR.append(error)
 
     print('G_len:{}, G_{}%:{}, RMSE_FG:{:.3f}, RMSE_PR:{:.3f} '.format(len(G.edges()), n, len(G_n.edges()), error_FG[step], error_PR[step]))
 
@@ -59,7 +63,7 @@ plt.plot(percentage, error_PR, color='red', label='PageRank')
 plt.legend()
 plt.xlabel('Percentage of edges removed')
 plt.ylabel('RMSE Error')
-plt.savefig('result_' + filename +'.png')
+plt.savefig('./img/result_' + filename +'.png')
 
 
 
