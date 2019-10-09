@@ -56,10 +56,11 @@ def tidal_trust(G, G_n):
                 w_ /= iter_weight
             else:
                 w_ = 0
-            RMSE += (w_ - w) ** 2
-            iter += 1
         except:
             pass
+
+        RMSE += (w_ - w) ** 2
+        iter += 1
 
     RMSE /= iter
     RMSE = RMSE ** 0.5
