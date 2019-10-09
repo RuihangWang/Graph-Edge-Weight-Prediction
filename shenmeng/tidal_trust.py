@@ -1,8 +1,5 @@
 import networkx as nx
-import matplotlib.pyplot as plt
-from itertools import compress
-import numpy as np
-from utils import leave_out_n
+
 
 
 def tidal_trust(G, G_n):
@@ -63,42 +60,12 @@ def tidal_trust(G, G_n):
             iter += 1
         except:
             pass
-        print(w, w_)
+
     RMSE /= iter
     RMSE = RMSE ** 0.5
 
     return RMSE
 
-G = nx.DiGraph()
-filenames = ['OTCNet', 'RFAnet', 'BTCAlphaNet', 'EpinionNetSignedNet', 'WikiSignedNet']
-filename = filenames[2]
-
-f = open('./CSV/' + filename +'.csv', "r")
-for l in f:
-    ls = l.strip().split(",")
-    if float(ls[2]) >= 0:
-        w = 1
-        p = float(ls[2])
-        n = 0
-    else:
-        p = 0
-        n = float(ls[2])
-        w = 0
-
-    G.add_edge(int(ls[0]), int(ls[1]), weight=float(ls[2]), signed_weight=w, positive=p, negative=n)
-
-f.close()
-
-G_n = leave_out_n(G, 20)
-error = tidal_trust(G, G_n)
-print(error)
-# nx.set_node_attributes(G,0,name='max')
-#
-# node_max=[]
-# q = []
-# color = [0] * len(G.edges())
-
-# tidal_trust(G, 1, 591)
 
 
 

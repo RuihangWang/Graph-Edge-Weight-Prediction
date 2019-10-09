@@ -38,9 +38,6 @@ def compute_fairness_goodness(G):
             inedges = G.in_edges(node, data='weight')
             g = 0
             for edge in inedges:
-                # print(fairness[edge[0]])
-                # print(edge)
-                # print(edge[2])
                 g += fairness[edge[0]]*edge[2]
             try:
                 dg += abs(g/len(inedges) - goodness[node])

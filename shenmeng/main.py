@@ -13,6 +13,7 @@ from utils import leave_out_n
 from page_rank import pagerank_predict_weight
 import fairness_goodness_computation as FG
 from signed_hits import signed_hits
+from tidal_trust import tidal_trust
 
 G = nx.DiGraph()
 
@@ -34,7 +35,7 @@ percentage = list(range(10, 100, 10))
 error_FG = []
 error_PR = []
 error_signed_hits = []
-
+error_tidal_trust = []
 for step,n in enumerate(percentage):
     G_n = leave_out_n(G, n)
     print('G_n')
@@ -59,13 +60,17 @@ for step,n in enumerate(percentage):
     error = signed_hits(G, G_n, h, a)
     error_signed_hits.append(error)
 
-    print('G_len:{}, G_{}%:{}, RMSE_FG:{:.3f}, RMSE_PR:{:.3f}, RMSE_SH:{:.3f} '.format(
-        len(G.edges()), n, len(G_n.edges()), error_FG[step], error_PR[step], error_signed_hits[step]))
+    error = tidal_trust(G, G_n)
+    error_tidal_trust.append(error)
+
+    print('G_len:{}, G_{}%:{}, RMSE_FG:{:.3f}, RMSE_PR:{:.3f}, RMSE_SH:{:.3f}, RMSE_TR:{:.3f} '.format(
+        len(G.edges()), n, len(G_n.edges()), error_FG[step], error_PR[step], error_signed_hits[step], error_tidal_trust[step]))
 
 plt.figure(dpi=500)
 plt.plot(percentage, error_FG, color='blue', label='F&G')
 plt.plot(percentage, error_PR, color='red', label='PageRank')
 plt.plot(percentage, error_signed_hits, color='green', label='Signed Hits')
+plt.plot(percentage, error_tidal_trust, color='black', label='Tidal Trust')
 plt.legend()
 plt.xlabel('Percentage of edges removed')
 plt.ylabel('RMSE Error')
