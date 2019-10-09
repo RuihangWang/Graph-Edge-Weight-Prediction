@@ -19,7 +19,7 @@ def leave_out_n(G, n):
 
     while (running):
         for (u, v) in slice:
-            if G_n.has_edge(u, v) and (len(G_n.in_edges(u)) >=1 or len(G_n.out_edges(u)) >= 2) and (len(G_n.in_edges(v)) >=2 or len(G_n.out_edges(v)) >= 1):
+            if G_n.has_edge(u, v) :
                 G_n.remove_edge(u,v)
                 len_G_n_edges -= 1
                 if len_G_n_edges <= target:
