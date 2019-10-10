@@ -6,6 +6,7 @@ def leave_out_1(G):
     :param G: input Graph
     :param n: n percentage edges will be removed, n ranges in(0,100]
     :return: Graph after leave out n percentage edges
+             the removed edge (u,v)
     """
     G_1 = G.copy()
     all_edges=[]
@@ -15,7 +16,7 @@ def leave_out_1(G):
     slice = slice[0]
     G_1.remove_edges_from(slice)
 
-    return  G_1
+    return  G_1, slice[0]
 
 def leave_out_n(G, n):
     """

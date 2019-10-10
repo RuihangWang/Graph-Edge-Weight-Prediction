@@ -18,7 +18,7 @@ from tidal_trust import tidal_trust
 G = nx.DiGraph()
 
 filenames = ['OTCNet', 'RFAnet', 'BTCAlphaNet', 'EpinionNetSignedNet', 'WikiSignedNet']
-filename = filenames[2]
+filename = filenames[0]
 
 f = open('./CSV/' + filename +'.csv', "r")
 for l in f:
