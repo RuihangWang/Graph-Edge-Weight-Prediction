@@ -9,12 +9,14 @@ def pagerank_predict_weight(G, G_n, PR):
     iter = 0
     total_w = []
     total_w_ = []
-    target = len(G.edges()) - len(G_n.edges())
     G_PR = G_n.copy()
+
     w_in = {}
     w_out ={}
     PR_total_out = {}
     PR_total_in = {}
+
+    # 对G_PR图的所有节点n计算out edge和in edge的边权重在PageRank值上的加权平均
     for (u,w) in G_PR.nodes(data='weight'):
         w_in_v = 0
         w_out_v = 0
@@ -34,6 +36,10 @@ def pagerank_predict_weight(G, G_n, PR):
     nx.set_node_attributes(G_PR, w_out, 'w_out')
     nx.set_node_attributes(G_PR, PR_total_in, 'PR_total_in')
     nx.set_node_attributes(G_PR, PR_total_out, 'PR_total_out')
+
+    # 用源节点u的out edge和目标节点v的in edge的
+    # edge weight 在 PageRank值上的加权平均
+    # 作为预测值
 
     for (u, v, w) in G.edges(data='weight'):
         if G_PR.has_edge(u, v):

@@ -11,6 +11,8 @@ def signed_hits(G, G_n, h, a):
     Hits_total_out = {}
     Hits_total_in = {}
 
+    # 对G_PR图的所有节点n计算out edge的边权重在源节点的hub值上的加权平均
+    # 对G_PR图的所有节点n计算in edge的边权重在源节点的authority值上的加权平均
     for (u, w) in G_hits.nodes(data='weight'):
         w_in_v = 0
         w_out_v = 0
@@ -33,6 +35,10 @@ def signed_hits(G, G_n, h, a):
 
     RMSE = 0
     iter = 0
+
+    # 源节点u计算out edge的边权重在源节点的hub值上的加权平均
+    # 目标节点v计算in edge的边权重在目标节点的authority值上的加权平均
+    # 取两者平均值作为预测值
 
     for (u, v, w) in G.edges(data='weight'):
         if G_hits.has_edge(u, v):
