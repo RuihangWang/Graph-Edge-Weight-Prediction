@@ -1,10 +1,11 @@
 import networkx as nx
-
+from scipy.stats.stats import pearsonr
 
 def signed_hits(G, G_n, h, a):
 
     G_hits = G_n.copy()
-
+    total_w = []
+    total_w_ = []
     w_in = {}
     w_out = {}
     Hits_total_out = {}
@@ -44,8 +45,12 @@ def signed_hits(G, G_n, h, a):
         w_ /= 2
         iter += 1
         RMSE += (w_ - w) ** 2
+        total_w.append(w)
+        total_w_.append(w_)
     RMSE /= iter
     RMSE = RMSE ** 0.5
-    return RMSE
+    PCC = pearsonr(total_w, total_w_)
+
+    return RMSE, PCC[0]
 
 

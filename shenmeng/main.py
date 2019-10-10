@@ -25,9 +25,13 @@ for l in f:
     ls = l.strip().split(",")
     if float(ls[2]) >= 0:
         w = 1
+        p = float(ls[2])
+        n = 0
     else:
+        p = 0
+        n = float(ls[2])
         w = 0
-    G.add_edge(ls[0], ls[1], weight=float(ls[2]), signed_weight=w)
+    G.add_edge(ls[0], ls[1], weight=float(ls[2]), signed_weight=w, positive=p, negative=n)
 
 f.close()
 
@@ -36,37 +40,53 @@ error_FG = []
 error_PR = []
 error_signed_hits = []
 error_tidal_trust = []
+
+pcc_FG = []
+pcc_PR = []
+pcc_signed_hits = []
+pcc_tidal_trust = []
 for step,n in enumerate(percentage):
     G_n = leave_out_n(G, n)
-    print('G_n')
+
     """
         PageRank
     """
     PR = nx.pagerank(G_n, weight='signed_weight')
-    error = pagerank_predict_weight(G, G_n, PR)
+    error, pcc = pagerank_predict_weight(G, G_n, PR)
     error_PR.append(error)
+    pcc_PR.append(pcc)
 
     """
         Fairness and Goodness
     """
     fairness, goodness = FG.compute_fairness_goodness(G_n)
-    error = FG.FG_predict_weight(G, G_n, fairness, goodness)
+    error, pcc = FG.FG_predict_weight(G, G_n, fairness, goodness)
     error_FG.append(error)
+    pcc_FG.append(pcc)
 
     """
         Signed hits
     """
     h, a = nx.hits(G)
-    error = signed_hits(G, G_n, h, a)
+    error, pcc = signed_hits(G, G_n, h, a)
     error_signed_hits.append(error)
+    pcc_signed_hits.append(pcc)
 
-    error = tidal_trust(G, G_n)
+    """
+        Tidal Trust
+    """
+    error, pcc = tidal_trust(G, G_n)
     error_tidal_trust.append(error)
+    pcc_tidal_trust.append(pcc)
 
     print('G_len:{}, G_{}%:{}, RMSE_FG:{:.3f}, RMSE_PR:{:.3f}, RMSE_SH:{:.3f}, RMSE_TR:{:.3f} '.format(
         len(G.edges()), n, len(G_n.edges()), error_FG[step], error_PR[step], error_signed_hits[step], error_tidal_trust[step]))
 
+    print('G_len:{}, G_{}%:{}, PCC_FG:{:.3f}, PCC_PR:{:.3f}, PCC_SH:{:.3f}, PCC_TR:{:.3f} '.format(
+        len(G.edges()), n, len(G_n.edges()), pcc_FG[step], pcc_PR[step], pcc_signed_hits[step], pcc_tidal_trust[step]))
+
 plt.figure(dpi=500)
+plt.xlim(xmax=100, xmin=0)
 plt.plot(percentage, error_FG, color='blue', label='F&G')
 plt.plot(percentage, error_PR, color='red', label='PageRank')
 plt.plot(percentage, error_signed_hits, color='green', label='Signed Hits')
@@ -74,7 +94,18 @@ plt.plot(percentage, error_tidal_trust, color='black', label='Tidal Trust')
 plt.legend()
 plt.xlabel('Percentage of edges removed')
 plt.ylabel('RMSE Error')
-plt.savefig('./img/result_' + filename +'.png')
+plt.savefig('./img/RMSE_' + filename +'.png')
+
+plt.figure(dpi=500)
+plt.xlim(xmax=100, xmin=0)
+plt.plot(percentage, pcc_FG, color='blue', label='F&G')
+plt.plot(percentage, pcc_PR, color='red', label='PageRank')
+plt.plot(percentage, pcc_signed_hits, color='green', label='Signed Hits')
+plt.plot(percentage, pcc_tidal_trust, color='black', label='Tidal Trust')
+plt.legend()
+plt.xlabel('Percentage of edges removed')
+plt.ylabel('PCC')
+plt.savefig('./img/PCC_' + filename +'.png')
 
 
 

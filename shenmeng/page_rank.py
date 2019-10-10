@@ -2,9 +2,13 @@
 Page Rank
 """
 import networkx as nx
+from scipy.stats.stats import pearsonr
+
 def pagerank_predict_weight(G, G_n, PR):
     RMSE = 0
     iter = 0
+    total_w = []
+    total_w_ = []
     target = len(G.edges()) - len(G_n.edges())
     G_PR = G_n.copy()
     w_in = {}
@@ -40,9 +44,13 @@ def pagerank_predict_weight(G, G_n, PR):
             w_ /= PR_total
         iter += 1
         RMSE += (w_ - w) ** 2
+        total_w.append(w)
+        total_w_.append(w_)
     RMSE /= iter
     RMSE = RMSE ** 0.5
-    return RMSE
+    PCC = pearsonr(total_w, total_w_)
+
+    return RMSE, PCC[0]
 
 
 

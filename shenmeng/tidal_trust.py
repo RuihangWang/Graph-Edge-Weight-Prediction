@@ -1,15 +1,16 @@
 import networkx as nx
-
+from scipy.stats.stats import pearsonr
 
 
 def tidal_trust(G, G_n):
 
     RMSE = 0
     iter = 0
+    total_w = []
+    total_w_ = []
     for (u, v, w) in G.edges(data='weight'):
         if G_n.has_edge(u, v):
             continue
-
         paths = nx.all_shortest_paths(G_n, u, v)
         weight_positive = 0
         weight_negative = 0
@@ -52,6 +53,7 @@ def tidal_trust(G, G_n):
                 if weight_positive is not None and weight_negative is not None:
                     w_ += weight_positive + weight_negative
                     iter_weight += 1
+
             if iter_weight != 0:
                 w_ /= iter_weight
             else:
@@ -61,11 +63,15 @@ def tidal_trust(G, G_n):
 
         RMSE += (w_ - w) ** 2
         iter += 1
+        total_w.append(w)
+        total_w_.append(w_)
 
     RMSE /= iter
     RMSE = RMSE ** 0.5
+    PCC = pearsonr(total_w, total_w_)
 
-    return RMSE
+
+    return RMSE, PCC[0]
 
 
 

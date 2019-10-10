@@ -9,6 +9,7 @@ Email of code author: srijan@cs.stanford.edu
 '''
 
 import math
+from scipy.stats.stats import pearsonr
 
 
 def initialize_scores(G):
@@ -67,16 +68,21 @@ def FG_predict_weight(G, G_n ,fairness, goodness):
 
     RMSE = 0
     iter = 0
-    for (u, v, true_weight) in G.edges(data='weight'):
+    total_w = []
+    total_w_ = []
+    for (u, v, w) in G.edges(data='weight'):
         if G_n.has_edge(str(u),str(v)):
             continue
-        predict_weight = fairness[u] * goodness[v]
-        RMSE += (predict_weight - true_weight) ** 2
+        w_ = fairness[u] * goodness[v]
+        RMSE += (w_ - w) ** 2
+        total_w.append(w)
+        total_w_.append(w_)
         iter += 1
     RMSE /= iter
     RMSE = RMSE ** 0.5
+    PCC = pearsonr(total_w, total_w_)
 
-    return RMSE
+    return RMSE, PCC[0]
 
 
 
