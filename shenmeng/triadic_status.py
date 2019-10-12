@@ -39,7 +39,7 @@ def triadic_status(G,G_n, u_v_edge=None):
         total_w.append(w)
         total_w_.append(w_)
 
-    RMSE = mean_squared_error(total_w, total_w_)
+    RMSE = mean_squared_error(total_w, total_w_) ** 0.5
     PCC = pearsonr(total_w, total_w_)
 
     return RMSE, PCC[0]

@@ -14,13 +14,13 @@ from page_rank import pagerank_predict_weight, pagerank_PR_graph
 import fairness_goodness_computation as FG
 from signed_hits import signed_hits, signed_G_hits
 from triadic_status import triadic_status
-from Multiple_Regression_Model import Multiple_Regression
+from Multiple_Regression_Model import Multiple_Regression, train_reg
 import time
 
 G = nx.DiGraph()
 
 filenames = ['OTCNet', 'RFAnet', 'BTCAlphaNet', 'EpinionNetSignedNet', 'WikiSignedNet']
-filename = filenames[3]
+filename = filenames[0]
 
 f = open('./CSV/' + filename +'.csv', "r")
 for l in f:
@@ -37,76 +37,39 @@ for l in f:
 
 f.close()
 
-percentage = list(range(10, 100, 10))
+per = list(range(10, 100, 10))
+error = {'FG':list(range(len(per))), 'PR':list(range(len(per))), 'SH':list(range(len(per))), 'TS':list(range(len(per))), 'LR':list(range(len(per)))}
+pcc = {'FG':list(range(len(per))), 'PR':list(range(len(per))), 'SH':list(range(len(per))), 'TS':list(range(len(per))), 'LR':list(range(len(per)))}
 
-error_FG = []
-error_PR = []
-error_signed_hits = []
-error_triadic_status = []
-error_LR = []
-
-pcc_FG = []
-pcc_PR = []
-pcc_signed_hits = []
-pcc_triadic_status = []
-pcc_LR = []
-start_time = time.time()
-for step,n in enumerate(percentage):
+for step,n in enumerate(per):
     G_n = leave_out_n(G, n)
-    print(time.time() - start_time)
-    """
-        PageRank
-    """
+
     PR = nx.pagerank(G_n, weight='signed_weight')
     G_PR = pagerank_PR_graph(G_n, PR)
-    error, pcc = pagerank_predict_weight(G, G_PR)
-    error_PR.append(error)
-    pcc_PR.append(pcc)
-    print(time.time() - start_time)
-    """
-        Fairness and Goodness
-    """
     fairness, goodness = FG.compute_fairness_goodness(G_n)
-    error, pcc = FG.FG_predict_weight(G, G_n, fairness, goodness)
-    error_FG.append(error)
-    pcc_FG.append(pcc)
-    print(time.time() - start_time)
-    """
-        Signed hits
-    """
-    h, a = nx.hits(G)
+    h, a = nx.hits(G_n,max_iter=300)
     G_hits = signed_G_hits(G_n, h, a)
-    error, pcc = signed_hits(G, G_hits)
-    error_signed_hits.append(error)
-    pcc_signed_hits.append(pcc)
-    print(time.time() - start_time)
-    """
-        Triadic Status
-    """
-    error, pcc = triadic_status(G, G_n)
-    error_triadic_status.append(error)
-    pcc_triadic_status.append(pcc)
-    print(time.time() - start_time)
-    """
-        Multiple_Regression
-    """
-    error, pcc = Multiple_Regression(G, G_n, fairness, goodness, G_PR, G_hits)
-    error_LR.append(error)
-    pcc_LR.append(pcc)
-    print(time.time() - start_time)
+    reg = train_reg(G, G_n, fairness, goodness, G_PR, G_hits)
+
+    error['PR'][step], pcc['PR'][step] = pagerank_predict_weight(G, G_PR)
+    error['FG'][step], pcc['FG'][step] = FG.FG_predict_weight(G, G_n, fairness, goodness)
+    error['SH'][step], pcc['SH'][step] = signed_hits(G, G_hits)
+    error['TS'][step], pcc['TS'][step] = triadic_status(G, G_n)
+    error['LR'][step], pcc['LR'][step] = Multiple_Regression(G, G_n, reg, fairness, goodness, G_PR, G_hits)
+
     print('G_len:{}, G_{}%:{}, RMSE_FG:{:.3f}, RMSE_PR:{:.3f}, RMSE_SH:{:.3f}, RMSE_TS:{:.3f}, RMSE_LR:{:.3f}'.format(
-        len(G.edges()), n, len(G_n.edges()), error_FG[step], error_PR[step], error_signed_hits[step], error_triadic_status[step], error_LR[step]))
+        len(G.edges()), n, len(G_n.edges()), error['FG'][step], error['PR'][step], error['SH'][step], error['TS'][step], error['LR'][step]))
 
     print('G_len:{}, G_{}%:{}, PCC_FG:{:.3f}, PCC_PR:{:.3f}, PCC_SH:{:.3f}, PCC_TS:{:.3f}, PCC_LR:{:.3f}'.format(
-        len(G.edges()), n, len(G_n.edges()), pcc_FG[step], pcc_PR[step], pcc_signed_hits[step], pcc_triadic_status[step], pcc_LR[step]))
+        len(G.edges()), n, len(G_n.edges()), pcc['FG'][step], pcc['PR'][step], pcc['SH'][step], pcc['TS'][step], pcc['LR'][step]))
 
 plt.figure(dpi=500)
 plt.xlim(xmax=100, xmin=0)
-plt.plot(percentage, error_FG, label='F&G')
-plt.plot(percentage, error_PR, label='PageRank')
-plt.plot(percentage, error_signed_hits, label='Signed Hits')
-plt.plot(percentage, error_triadic_status, label='Triadic Status')
-plt.plot(percentage, error_LR, label='LR')
+plt.plot(per, error['FG'], label='F&G')
+plt.plot(per, error['PR'], label='PageRank')
+plt.plot(per, error['SH'], label='Signed Hits')
+plt.plot(per, error['TS'], label='Triadic Status')
+plt.plot(per, error['LR'], label='LR')
 plt.legend()
 plt.xlabel('Percentage of edges removed')
 plt.ylabel('RMSE Error')
@@ -114,11 +77,11 @@ plt.savefig('./img/RMSE_' + filename +'.png')
 
 plt.figure(dpi=500)
 plt.xlim(xmax=100, xmin=0)
-plt.plot(percentage, pcc_FG, label='F&G')
-plt.plot(percentage, pcc_PR, label='PageRank')
-plt.plot(percentage, pcc_signed_hits, label='Signed Hits')
-plt.plot(percentage, pcc_triadic_status, label='Triadic Status')
-plt.plot(percentage, pcc_LR, label='LR')
+plt.plot(per, pcc['FG'], label='F&G')
+plt.plot(per, pcc['PR'], label='PageRank')
+plt.plot(per, pcc['SH'], label='Signed Hits')
+plt.plot(per, pcc['TS'], label='Triadic Status')
+plt.plot(per, pcc['LR'], label='LR')
 plt.legend()
 plt.xlabel('Percentage of edges removed')
 plt.ylabel('PCC')

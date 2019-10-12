@@ -22,6 +22,7 @@ def train_reg(G, G_n,fairness, goodness, G_PR, G_hits):
     train_w_x = np.array(train_w_x)
     train_w_y = np.array(train_w_y)
     reg = LinearRegression().fit(train_w_x, train_w_y)
+    print(reg.coef_, reg.intercept_)
     return reg
 
 def cal_w_(G, G_n,fairness, goodness, G_PR, G_hits, reg, u, v):
@@ -31,9 +32,7 @@ def cal_w_(G, G_n,fairness, goodness, G_PR, G_hits, reg, u, v):
     w_ = float(reg.predict(np.array([[w_pr, w_fg, w_sh]])))
     return w_
 
-def Multiple_Regression(G, G_n,fairness, goodness, G_PR, G_hits, u_v_edge = None):
-    reg = train_reg(G, G_n,fairness, goodness, G_PR, G_hits)
-    print(reg.coef_, reg.intercept_)
+def Multiple_Regression(G, G_n,reg, fairness, goodness, G_PR, G_hits, u_v_edge = None):
 
     if u_v_edge is not None:
         (u, v) = u_v_edge
@@ -45,10 +44,9 @@ def Multiple_Regression(G, G_n,fairness, goodness, G_PR, G_hits, u_v_edge = None
         if G_n.has_edge(u, v):
             continue
         w_ = cal_w_(G, G_n, fairness, goodness, G_PR, G_hits, reg, u, v)
-
         total_w_.append(w_)
         total_w.append(w)
-    RMSE = mean_squared_error(total_w, total_w_)
+    RMSE = mean_squared_error(total_w, total_w_) ** 0.5
     PCC = pearsonr(total_w, total_w_)
 
     return RMSE, PCC[0]

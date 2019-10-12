@@ -61,7 +61,7 @@ def signed_hits(G, G_hits, u_v_edge=None):
         w_ = cal_w_(u, v, G_hits)
         total_w.append(w)
         total_w_.append(w_)
-    RMSE = mean_squared_error(total_w, total_w_)
+    RMSE = mean_squared_error(total_w, total_w_) ** 0.5
     PCC = pearsonr(total_w, total_w_)
 
     return RMSE, PCC[0]

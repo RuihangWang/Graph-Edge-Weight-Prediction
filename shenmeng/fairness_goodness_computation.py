@@ -1,13 +1,3 @@
-'''
-Code for the paper:
-Edge Weight Prediction in Weighted Signed Networks. 
-Conference: ICDM 2016
-Authors: Srijan Kumar, Francesca Spezzano, VS Subrahmanian and Christos Faloutsos
-
-Author of code: Srijan Kumar
-Email of code author: srijan@cs.stanford.edu
-'''
-
 import math
 from scipy.stats.stats import pearsonr
 from sklearn.metrics import mean_squared_error
@@ -86,7 +76,7 @@ def FG_predict_weight(G, G_n ,fairness, goodness, u_v_edge=None):
         total_w.append(w)
         total_w_.append(w_)
 
-    RMSE = mean_squared_error(total_w, total_w_)
+    RMSE = mean_squared_error(total_w, total_w_) ** 0.5
     PCC = pearsonr(total_w, total_w_)
 
     return RMSE, PCC[0]
