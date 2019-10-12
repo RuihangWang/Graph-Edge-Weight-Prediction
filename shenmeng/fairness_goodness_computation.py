@@ -10,6 +10,7 @@ Email of code author: srijan@cs.stanford.edu
 
 import math
 from scipy.stats.stats import pearsonr
+from sklearn.metrics import mean_squared_error
 
 
 def initialize_scores(G):
@@ -64,22 +65,28 @@ def compute_fairness_goodness(G):
 
     return fairness, goodness
 
-def FG_predict_weight(G, G_n ,fairness, goodness):
+def cal_w_(u,v,fairness,goodness):
+    w_ = fairness[u] * goodness[v]
+    return w_
 
-    RMSE = 0
-    iter = 0
+def FG_predict_weight(G, G_n ,fairness, goodness, u_v_edge=None):
+
     total_w = []
     total_w_ = []
+
+    if u_v_edge is not None:
+        (u,v) = u_v_edge
+        w_ = cal_w_(u, v, fairness, goodness)
+        return w_
+
     for (u, v, w) in G.edges(data='weight'):
         if G_n.has_edge(str(u),str(v)):
             continue
-        w_ = fairness[u] * goodness[v]
-        RMSE += (w_ - w) ** 2
+        w_ = cal_w_(u, v, fairness, goodness)
         total_w.append(w)
         total_w_.append(w_)
-        iter += 1
-    RMSE /= iter
-    RMSE = RMSE ** 0.5
+
+    RMSE = mean_squared_error(total_w, total_w_)
     PCC = pearsonr(total_w, total_w_)
 
     return RMSE, PCC[0]

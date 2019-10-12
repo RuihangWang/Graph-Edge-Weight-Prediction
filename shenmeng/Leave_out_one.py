@@ -15,12 +15,12 @@ import fairness_goodness_computation as FG
 from signed_hits import signed_hits, signed_G_hits
 from triadic_status import triadic_status
 from Multiple_Regression_Model import Multiple_Regression
-import time
+import random
 
 G = nx.DiGraph()
 
 filenames = ['OTCNet', 'RFAnet', 'BTCAlphaNet', 'EpinionNetSignedNet', 'WikiSignedNet']
-filename = filenames[3]
+filename = filenames[0]
 
 f = open('./CSV/' + filename +'.csv', "r")
 for l in f:
@@ -50,55 +50,49 @@ pcc_PR = []
 pcc_signed_hits = []
 pcc_triadic_status = []
 pcc_LR = []
-start_time = time.time()
-for step,n in enumerate(percentage):
-    G_n = leave_out_n(G, n)
-    print(time.time() - start_time)
+
+remove_edges_num = 1000
+remove_edges = range(remove_edges_num)
+all_edges = []
+for (u, v) in G.edges():
+    all_edges.append((u, v))
+remove_edges = random.sample(all_edges,len(remove_edges))
+
+for step, (u, v) in enumerate(remove_edges):
+    G_1 = G.copy()
+    G_1.remove_edge(u,v)
+
     """
         PageRank
     """
-    PR = nx.pagerank(G_n, weight='signed_weight')
-    G_PR = pagerank_PR_graph(G_n, PR)
-    error, pcc = pagerank_predict_weight(G, G_PR)
-    error_PR.append(error)
-    pcc_PR.append(pcc)
-    print(time.time() - start_time)
+    PR = nx.pagerank(G_1, weight='signed_weight')
+    G_PR = pagerank_PR_graph(G_1, PR)
+    w_PR = pagerank_predict_weight(G, G_PR, (u,v))
+
     """
         Fairness and Goodness
     """
-    fairness, goodness = FG.compute_fairness_goodness(G_n)
-    error, pcc = FG.FG_predict_weight(G, G_n, fairness, goodness)
-    error_FG.append(error)
-    pcc_FG.append(pcc)
-    print(time.time() - start_time)
+    fairness, goodness = FG.compute_fairness_goodness(G_1)
+    w_FG = FG.FG_predict_weight(G, G_1, fairness, goodness, (u,v))
+
     """
         Signed hits
     """
     h, a = nx.hits(G)
-    G_hits = signed_G_hits(G_n, h, a)
-    error, pcc = signed_hits(G, G_hits)
-    error_signed_hits.append(error)
-    pcc_signed_hits.append(pcc)
-    print(time.time() - start_time)
+    G_hits = signed_G_hits(G_1, h, a)
+    w_SH = signed_hits(G, G_hits, (u,v))
+
     """
         Triadic Status
     """
-    error, pcc = triadic_status(G, G_n)
-    error_triadic_status.append(error)
-    pcc_triadic_status.append(pcc)
-    print(time.time() - start_time)
+    w_TS = triadic_status(G, G_1, (u,v))
+
     """
         Multiple_Regression
     """
-    error, pcc = Multiple_Regression(G, G_n, fairness, goodness, G_PR, G_hits)
-    error_LR.append(error)
-    pcc_LR.append(pcc)
-    print(time.time() - start_time)
-    print('G_len:{}, G_{}%:{}, RMSE_FG:{:.3f}, RMSE_PR:{:.3f}, RMSE_SH:{:.3f}, RMSE_TS:{:.3f}, RMSE_LR:{:.3f}'.format(
-        len(G.edges()), n, len(G_n.edges()), error_FG[step], error_PR[step], error_signed_hits[step], error_triadic_status[step], error_LR[step]))
+    w_LR = Multiple_Regression(G, G_1, fairness, goodness, G_PR, G_hits, (u,v))
 
-    print('G_len:{}, G_{}%:{}, PCC_FG:{:.3f}, PCC_PR:{:.3f}, PCC_SH:{:.3f}, PCC_TS:{:.3f}, PCC_LR:{:.3f}'.format(
-        len(G.edges()), n, len(G_n.edges()), pcc_FG[step], pcc_PR[step], pcc_signed_hits[step], pcc_triadic_status[step], pcc_LR[step]))
+
 
 plt.figure(dpi=500)
 plt.xlim(xmax=100, xmin=0)

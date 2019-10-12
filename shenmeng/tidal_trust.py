@@ -1,7 +1,6 @@
 import networkx as nx
 from scipy.stats.stats import pearsonr
 
-
 def tidal_trust(G, G_n):
 
     RMSE = 0
