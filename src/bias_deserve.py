@@ -65,7 +65,7 @@ def BD_predict_weight(G, G_n ,bias, des, u_v_edge=None):
 
     if u_v_edge is not None:
         u, v  = u_v_edge
-        return des[v]
+        return cal_w_(des, u, v)
 
 
     total_w = []
@@ -73,7 +73,7 @@ def BD_predict_weight(G, G_n ,bias, des, u_v_edge=None):
     for (u, v, w) in G.edges(data='weight'):
         if G_n.has_edge(u,v):
             continue
-        w_ = des[v]
+        w_ = cal_w_(des, u, v)
         total_w.append(w)
         total_w_.append(w_)
   

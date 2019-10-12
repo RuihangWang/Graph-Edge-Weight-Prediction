@@ -3,13 +3,19 @@
     Leave one out
 """
 import networkx as nx
-from page_rank import pagerank_predict_weight, pagerank_PR_graph
-import fairness_goodness_computation as FG
-from signed_hits import signed_hits, signed_G_hits
-from triadic_status import triadic_status
-from Multiple_Regression_Model import Multiple_Regression, train_reg
 import random
 from sklearn.metrics import mean_squared_error
+from scipy.stats.stats import pearsonr
+import fairness_goodness_computation as FG
+import page_rank as PG
+import signed_hits as SH
+import triadic_status as TS
+import Multiple_Regression_Model as LR
+import bias_deserve as BD
+import reciprocal as RP
+import status_theory as ST
+import triadiac_balance as TB
+
 
 
 G = nx.DiGraph()
@@ -17,7 +23,7 @@ G = nx.DiGraph()
 filenames = ['OTCNet', 'RFAnet', 'BTCAlphaNet', 'EpinionNetSignedNet', 'WikiSignedNet']
 filename = filenames[2]
 
-f = open('./CSV/' + filename +'.csv', "r")
+f = open('./dataset/' + filename +'.csv', "r")
 for l in f:
     ls = l.strip().split(",")
     if float(ls[2]) >= 0:
@@ -34,7 +40,7 @@ f.close()
 
 percentage = list(range(10, 100, 10))
 
-total_w_ = {'FG':[], 'PR':[], 'SH':[], 'TS':[], 'LR':[]}
+total_w_ = {'FG':[], 'PR':[], 'SH':[], 'TS':[], 'LR':[], 'BD':[], 'RP':[], 'ST':[], 'TB':[]}
 total_w = []
 
 ### remove edges
@@ -49,20 +55,26 @@ G_1 = G.copy()
 
 ### cal different graphs or parameters
 PR = nx.pagerank(G_1, weight='signed_weight')
-G_PR = pagerank_PR_graph(G_1, PR)
+G_PR = PG.pagerank_PR_graph(G_1, PR)
 fairness, goodness = FG.compute_fairness_goodness(G_1)
-h, a = nx.hits(G_1)
-G_hits = signed_G_hits(G_1, h, a)
-reg = train_reg(G, G_1, fairness, goodness, G_PR, G_hits)
+h, a = nx.hits(G_1, max_iter=300)
+G_hits = SH.signed_G_hits(G_1, h, a)
+reg = LR.train_reg(G, G_1, fairness, goodness, G_PR, G_hits)
+bias, des = BD.compute_bias_des(G_1)
+sigma = ST.compute_status(G_1)
 
 for step, (u, v) in enumerate(remove_edges):
     G_1.remove_edge(u, v)
 
-    total_w_['PR'].append(pagerank_predict_weight(G, G_PR, (u,v)))
+    total_w_['PR'].append(PG.pagerank_predict_weight(G, G_PR, (u,v)))
     total_w_['FG'].append(FG.FG_predict_weight(G, G_1, fairness, goodness, (u,v)))
-    total_w_['SH'].append(signed_hits(G, G_hits, (u,v)))
-    total_w_['TS'].append(triadic_status(G, G_1, (u,v)))
-    total_w_['LR'].append(Multiple_Regression(G, G_1, reg, fairness, goodness, G_PR, G_hits, (u,v)))
+    total_w_['SH'].append(SH.signed_hits(G, G_hits, (u,v)))
+    total_w_['TS'].append(TS.triadic_status(G, G_1, (u,v)))
+    total_w_['BD'].append(BD.BD_predict_weight(G, G_1, bias, des, (u,v)))
+    total_w_['RP'].append(RP.reci_pred(G, G_1, (u,v)))
+    total_w_['ST'].append(ST.status_weight_pred(G, G_1, sigma, (u,v)))
+    total_w_['TB'].append(TB.tria_pred(G, G_1, (u,v)))
+    total_w_['LR'].append(LR.Multiple_Regression(G, G_1, reg, fairness, goodness, G_PR, G_hits, (u,v)))
     total_w.append(G[u][v]['weight'])
 
     G_1.add_edge(u,v, weight=G[u][v]['weight'],
@@ -70,14 +82,31 @@ for step, (u, v) in enumerate(remove_edges):
                  positive=G[u][v]['positive'],
                  negative=G[u][v]['negative'])
 
-log = "FG:{:.3f}, PR:{:.3f}, SH:{:.3f}, TS:{:.3f}, LR:{:.3f}".format(
+log_rmse = "FG:{:.3f}, PR:{:.3f}, SH:{:.3f}, TS:{:.3f}, BD:{:.3f}, RP:{:.3f}, ST:{:.3f}, TB:{:.3f}, LR:{:.3f}".format(
     mean_squared_error(total_w_['FG'], total_w) ** 0.5,
     mean_squared_error(total_w_['PR'], total_w) ** 0.5,
     mean_squared_error(total_w_['SH'], total_w) ** 0.5,
     mean_squared_error(total_w_['TS'], total_w) ** 0.5,
+    mean_squared_error(total_w_['BD'], total_w) ** 0.5,
+    mean_squared_error(total_w_['RP'], total_w) ** 0.5,
+    mean_squared_error(total_w_['ST'], total_w) ** 0.5,
+    mean_squared_error(total_w_['TB'], total_w) ** 0.5,
     mean_squared_error(total_w_['LR'], total_w) ** 0.5
 )
-print(log)
+print(log_rmse)
+
+log_pcc = "FG:{:.3f}, PR:{:.3f}, SH:{:.3f}, TS:{:.3f}, BD:{:.3f}, RP:{:.3f}, ST:{:.3f}, TB:{:.3f}, LR:{:.3f}".format(
+    pearsonr(total_w_['FG'], total_w)[0],
+    pearsonr(total_w_['PR'], total_w)[0],
+    pearsonr(total_w_['SH'], total_w)[0],
+    pearsonr(total_w_['TS'], total_w)[0],
+    pearsonr(total_w_['BD'], total_w)[0],
+    pearsonr(total_w_['RP'], total_w)[0],
+    pearsonr(total_w_['ST'], total_w)[0],
+    pearsonr(total_w_['TB'], total_w)[0],
+    pearsonr(total_w_['LR'], total_w)[0]
+)
+print(log_pcc)
 
 
 

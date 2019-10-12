@@ -4,6 +4,7 @@ from sklearn.metrics import mean_squared_error
 
 def cal_w_(G_n,u,v):
     if G_n.has_edge(v,u):
+        w = G_n[v][u]['weight']
         w_ = w
     else:
         w_ = 0
@@ -13,7 +14,7 @@ def reci_pred(G, G_n, u_v_edge=None):
 
     if u_v_edge is not None:
         u,v = u_v_edge
-        return cal_w_(G_n, u, v) 
+        return cal_w_(G_n, u, v)
 
     total_w = []
     total_w_ = []
