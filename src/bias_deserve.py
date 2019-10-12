@@ -58,7 +58,15 @@ def compute_bias_des(G):
 
     return bias, des
 
-def BD_predict_weight(G, G_n ,bias, des):
+def cal_w_(des, u, v):
+    return des[v]
+
+def BD_predict_weight(G, G_n ,bias, des, u_v_edge=None):
+
+    if u_v_edge is not None:
+        u, v  = u_v_edge
+        return des[v]
+
 
     total_w = []
     total_w_ = []

@@ -42,15 +42,22 @@ def compute_status(G):
     
     return sigma
 
-def status_weight_pred(G, G_n, sigma):
+def cal_w_(sigma, u,v):
+    return sigma[u] - sigma[v]
+
+def status_weight_pred(G, G_n, sigma, u_v_edge=None):
     
+    if u_v_edge is not None:
+        u, v = u_v_edge
+        return cal_w_(sigma, u, v)
+
     total_w = []
     total_w_ = []
 
     for u, v, w in G.edges(data = 'weight'):
         if G_n.has_edge(u, v):
             continue
-        w_ = sigma[u] - sigma[v]
+        w_ = cal_w_(sigma, u, v)
         total_w.append(w)
         total_w_.append(w_)
   

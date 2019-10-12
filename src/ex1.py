@@ -38,7 +38,7 @@ total_w_ = {'FG':[], 'PR':[], 'SH':[], 'TS':[], 'LR':[]}
 total_w = []
 
 ### remove edges
-remove_edges_num = len(G.edges())
+remove_edges_num = 1000
 all_edges = []
 for (u, v) in G.edges():
     all_edges.append((u, v))

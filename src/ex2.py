@@ -4,7 +4,6 @@
 """
 import networkx as nx
 import matplotlib.pyplot as plt
-from utils import leave_out_n
 import page_rank as PG
 import fairness_goodness_computation as FG
 import signed_hits as SH
@@ -14,6 +13,7 @@ import bias_deserve as BD
 import reciprocal as RP
 import status_theory as ST
 import triadiac_balance as TB
+from utils import leave_out_n
 
 G = nx.DiGraph()
 
@@ -36,6 +36,7 @@ for l in f:
 f.close()
 
 per = list(range(10, 100, 10))
+
 error = {'FG':list(range(len(per))),
          'PR':list(range(len(per))),
          'SH':list(range(len(per))),
@@ -46,6 +47,7 @@ error = {'FG':list(range(len(per))),
          'RP':list(range(len(per))),
          'BD':list(range(len(per)))
          }
+
 pcc = {'FG':list(range(len(per))),
        'PR':list(range(len(per))),
        'SH':list(range(len(per))),
