@@ -5,11 +5,11 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 from utils import leave_out_n
-from page_rank import pagerank_predict_weight, pagerank_PR_graph
+import page_rank as PG
 import fairness_goodness_computation as FG
-from signed_hits import signed_hits, signed_G_hits
-from triadic_status import triadic_status
-from Multiple_Regression_Model import Multiple_Regression, train_reg
+import signed_hits as SH
+import triadic_status as TS
+import Multiple_Regression_Model as LR
 import bias_deserve as BD
 import reciprocal as RP
 import status_theory as ST
@@ -18,7 +18,7 @@ import triadiac_balance as TB
 G = nx.DiGraph()
 
 filenames = ['OTCNet', 'RFAnet', 'BTCAlphaNet', 'EpinionNetSignedNet', 'WikiSignedNet']
-filename = filenames[1]
+filename = filenames[2]
 
 f = open('./dataset/' + filename +'.csv', "r")
 for l in f:
@@ -61,24 +61,24 @@ for step,n in enumerate(per):
     G_n = leave_out_n(G, n)
 
     PR = nx.pagerank(G_n, weight='signed_weight')
-    G_PR = pagerank_PR_graph(G_n, PR)
+    G_PR = PG.pagerank_PR_graph(G_n, PR)
     fairness, goodness = FG.compute_fairness_goodness(G_n)
     h, a = nx.hits(G_n,max_iter=300)
-    G_hits = signed_G_hits(G_n, h, a)
-    reg = train_reg(G, G_n, fairness, goodness, G_PR, G_hits)
+    G_hits = SH.signed_G_hits(G_n, h, a)
+    reg = LR.train_reg(G, G_n, fairness, goodness, G_PR, G_hits)
     bias, des =BD.compute_bias_des(G_n)
     sigma = ST.compute_status(G_n)
 
 
-    error['PR'][step], pcc['PR'][step] = pagerank_predict_weight(G, G_PR)
+    error['PR'][step], pcc['PR'][step] = PG.pagerank_predict_weight(G, G_PR)
     error['FG'][step], pcc['FG'][step] = FG.FG_predict_weight(G, G_n, fairness, goodness)
-    error['SH'][step], pcc['SH'][step] = signed_hits(G, G_hits)
-    error['TS'][step], pcc['TS'][step] = triadic_status(G, G_n)
+    error['SH'][step], pcc['SH'][step] = SH.signed_hits(G, G_hits)
+    error['TS'][step], pcc['TS'][step] = TS.triadic_status(G, G_n)
     error['BD'][step], pcc['BD'][step] = BD.BD_predict_weight(G, G_n, bias, des)
     error['RP'][step], pcc['RP'][step] = RP.reci_pred(G, G_n)
     error['ST'][step], pcc['ST'][step] = ST.status_weight_pred(G, G_n, sigma)
     error['TB'][step], pcc['TB'][step] = TB.tria_pred(G, G_n)
-    error['LR'][step], pcc['LR'][step] = Multiple_Regression(G, G_n, reg, fairness, goodness, G_PR, G_hits)
+    error['LR'][step], pcc['LR'][step] = LR.Multiple_Regression(G, G_n, reg, fairness, goodness, G_PR, G_hits)
 
     print('G_len:{}, G_{}%:{}, RMSE_FG:{:.3f}, RMSE_PR:{:.3f}, RMSE_SH:{:.3f}, RMSE_TS:{:.3f}, RMSE_LR:{:.3f}, RMSE_TB:{:.3f}, RMSE_ST:{:.3f}, RMSE_RP:{:.3f}, RMSE_BD:{:.3f}'.format(
         len(G.edges()), n, len(G_n.edges()), error['FG'][step], error['PR'][step], error['SH'][step],
@@ -102,7 +102,7 @@ plt.plot(per, error['BD'], label='BD')
 plt.legend()
 plt.xlabel('Percentage of edges removed')
 plt.ylabel('RMSE Error')
-plt.savefig('./img/RMSE_' + filename +'.png')
+plt.savefig('./figures/RMSE_' + filename +'.png')
 
 plt.figure(dpi=500)
 plt.xlim(xmax=100, xmin=0)
@@ -119,7 +119,7 @@ plt.plot(per, pcc['BD'], label='BD')
 plt.legend()
 plt.xlabel('Percentage of edges removed')
 plt.ylabel('PCC')
-plt.savefig('./img/PCC_' + filename +'.png')
+plt.savefig('./figures/PCC_' + filename +'.png')
 
 
 
