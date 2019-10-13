@@ -15,6 +15,7 @@ from triadic_balance import Triadic_Balance
 from triadic_status import Triadic_Status
 from multiple_regression import Linear_Regression
 
+<<<<<<< HEAD
 print('\nSelect dataset for evaluation\n')
 print('Avaliable datset: BTCAlphaNet.csv, OTCNet.csv, RFAnet.csv\n')
 
@@ -46,6 +47,34 @@ if __name__ == "__main__":
         print("Triadic_Balance:", predict_weight(TB, G, G_n))
         print("Triadic_Status:", predict_weight(TS, G, G_n))
         print("Linear_Regression:", predict_weight(LR, G, G_n))
+=======
+G = init_Graph(filename='OTCNet.csv', path='../dataset/')
+
+percentages = list(range(10, 100, 10))
+
+for step, n in enumerate(percentages):
+    G_n = leave_out_n(G, n)
+    print(n)
+    PR = Page_Rank(G_n)
+    BD = Bias_Deserve(G_n)
+    FG = Fairness_Goodness(G_n)
+    RP = Reciprocal(G_n)
+    SH = Sighed_Hits(G_n)
+    ST = Status_Theory(G_n)
+    TB = Triadic_Balance(G_n)
+    TS = Triadic_Status(G_n)
+    LR = Linear_Regression(G,G_n,PR,FG,SH)
+
+    print(predict_weight(PR, G, G_n))
+    print(predict_weight(BD, G, G_n))
+    print(predict_weight(FG, G, G_n))
+    print(predict_weight(RP, G, G_n))
+    print(predict_weight(SH, G, G_n))
+    print(predict_weight(ST, G, G_n))
+    print(predict_weight(TB, G, G_n))
+    print(predict_weight(TS, G, G_n))
+    print(predict_weight(LR, G, G_n))
+>>>>>>> 7c63b36ac1aa178c8ceffe61b1169ec1b53cb750
 
 
 
