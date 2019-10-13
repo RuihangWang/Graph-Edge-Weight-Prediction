@@ -1,9 +1,80 @@
 import networkx as nx
+from collections import Counter
+
+def signed_hits(G, max_iter=100, tol=1.0e-8, normalized=True):
+
+    if type(G) == nx.MultiGraph or type(G) == nx.MultiDiGraph:
+        raise Exception("hits() not defined for graphs with multiedges.")
+    if len(G) == 0:
+        return {}, {}
+    # choose fixed starting vector if not given
+
+    h_p = dict.fromkeys(G, 1.0 / G.number_of_nodes())
+    h_n = dict.fromkeys(G, -1.0 / G.number_of_nodes())
+
+    for _ in range(max_iter):  # power iteration: make up to max_iter iterations
+        h_p_last = h_p
+        h_n_last = h_n
+
+        h_p = dict.fromkeys(h_p_last.keys(), 0)
+        h_n = dict.fromkeys(h_n_last.keys(), 0)
+        a_p = dict.fromkeys(h_p_last.keys(), 0)
+        a_n = dict.fromkeys(h_n_last.keys(), 0)
+
+        # this "matrix multiply" looks odd because it is
+        # doing a left multiply a^T=hlast^T*G
+
+        for u in h_p:
+            for v in G.pred[u]:
+                if G[v][u]['weight'] >= 0 :
+                    a_p[u] += h_p_last[v] * G[v][u]['weight']
+                else :
+                    a_n[u] -= h_n_last[v] * G[v][u]['weight']
+        for u in h_p:
+            for v in G.succ[u]:
+                if G[u][v]['weight'] >= 0:
+                    h_p[u] += a_p[v] * G[u][v]['weight']
+                else :
+                    h_n[u] -= a_n[v] * G[u][v]['weight']
+
+        h = dict(Counter(h_p) - Counter(h_n))
+        a = dict(Counter(a_p) - Counter(a_n))
+
+        # normalize vector
+        s = 1.0 / max(h_p.values())
+        for n in h_p:
+            h_p[n] *= s
+        # normalize vector
+        s = -1.0 / min(h_n.values())
+        for n in h_n:
+            h_n[n] *= s
+        # normalize vector
+        s = 1.0 / max(a_p.values())
+        for n in a_p:
+            a_p[n] *= s
+        # normalize vector
+        s = -1.0 / min(a_n.values())
+        for n in a_n:
+            a_n[n] *= s
+        # check convergence, l1 norm
+        err = sum([abs(h_p[n] - h_p_last[n]) for n in h_p] + [abs(h_n[n] - h_n_last[n]) for n in h_n] )
+        if err < tol:
+            break
+    else:
+        raise nx.PowerIterationFailedConvergence(max_iter)
+    if normalized:
+        s = 1.0 / sum(a.values())
+        for n in a:
+            a[n] *= s
+        s = 1.0 / sum(h.values())
+        for n in h:
+            h[n] *= s
+    return h, a
 
 class Sighed_Hits():
     def __init__(self, G):
         self.G = G
-        h, a = nx.hits(G, max_iter=500)
+        h, a = signed_hits(G, max_iter=500)
         G_hits = self.G.copy()
         w_in = {}
         w_out = {}
