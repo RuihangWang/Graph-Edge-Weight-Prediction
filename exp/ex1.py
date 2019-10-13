@@ -2,17 +2,18 @@
     experiment for
     Leave one out
 """
-from src.utils import *
-from src.page_rank import Page_Rank
-from src.bias_deserve import Bias_Deserve
-from src.fairness_goodness import Fairness_Goodness
-from src.reciprocal import Reciprocal
-from src.signed_hits import Sighed_Hits
-from src.status_theory import Status_Theory
-from src.triadic_balance import Triadic_Balance
-from src.triadic_status import Triadic_Status
-from src.multiple_regression import Linear_Regression
-
+import sys
+sys.path.append('../src')
+from utils import *
+from page_rank import Page_Rank
+from bias_deserve import Bias_Deserve
+from fairness_goodness import Fairness_Goodness
+from reciprocal import Reciprocal
+from signed_hits import Sighed_Hits
+from status_theory import Status_Theory
+from triadic_balance import Triadic_Balance
+from triadic_status import Triadic_Status
+from multiple_regression import Linear_Regression
 
 G = init_Graph(filename='OTCNet.csv', path='../dataset/')
 
@@ -24,7 +25,7 @@ total_w_ = {'FG':[], 'PR':[], 'SH':[], 'TS':[], 'LR':[], 'BD':[], 'RP':[], 'ST':
 total_w = []
 
 PR = Page_Rank(G_1)
-BG = Bias_Deserve(G_1)
+BD = Bias_Deserve(G_1)
 FG = Fairness_Goodness(G_1)
 RP = Reciprocal(G_1)
 SH = Sighed_Hits(G_1)
@@ -36,7 +37,7 @@ LR = Linear_Regression(G,G_1,PR,FG,SH)
 for step, (u, v) in enumerate(remove_edges):
     G_1.remove_edge(u, v)
     print(predict_weight(PR, G, G_1, (u, v)))
-    print(predict_weight(BG, G, G_1, (u, v)))
+    print(predict_weight(BD, G, G_1, (u, v)))
     print(predict_weight(FG, G, G_1, (u, v)))
     print(predict_weight(RP, G, G_1, (u, v)))
     print(predict_weight(SH, G, G_1, (u, v)))

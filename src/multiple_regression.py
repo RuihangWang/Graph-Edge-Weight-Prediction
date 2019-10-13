@@ -1,6 +1,6 @@
 import numpy as np
 from sklearn.linear_model import LinearRegression
-from src.utils import predict_weight
+from utils import predict_weight
 
 class Linear_Regression():
     def __init__(self, G, G_n, PR, FG, SH):
