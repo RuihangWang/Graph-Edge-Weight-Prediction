@@ -10,8 +10,9 @@ def signed_hits(G, max_iter=100, tol=1.0e-8, normalized=True):
     # choose fixed starting vector if not given
 
     h_p = dict.fromkeys(G, 1.0 / G.number_of_nodes())
-    h_n = dict.fromkeys(G, -1.0 / G.number_of_nodes())
-
+    h_n = dict.fromkeys(G, - 1.0 / G.number_of_nodes())
+    h = h_p
+    a = h_p
     for _ in range(max_iter):  # power iteration: make up to max_iter iterations
         h_p_last = h_p
         h_n_last = h_n
@@ -37,8 +38,6 @@ def signed_hits(G, max_iter=100, tol=1.0e-8, normalized=True):
                 else :
                     h_n[u] -= a_n[v] * G[u][v]['weight']
 
-        h = dict(Counter(h_p) - Counter(h_n))
-        a = dict(Counter(a_p) - Counter(a_n))
 
         # normalize vector
         s = 1.0 / max(h_p.values())
@@ -56,6 +55,11 @@ def signed_hits(G, max_iter=100, tol=1.0e-8, normalized=True):
         s = -1.0 / min(a_n.values())
         for n in a_n:
             a_n[n] *= s
+
+        for key, value in h.items():
+            h[key] = h_p[key] - h_n[key]
+            a[key] = a_p[key] - a_n[key]
+
         # check convergence, l1 norm
         err = sum([abs(h_p[n] - h_p_last[n]) for n in h_p] + [abs(h_n[n] - h_n_last[n]) for n in h_n] )
         if err < tol:
