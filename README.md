@@ -12,7 +12,7 @@ The project is supported on Linux and MacOS. It may be possible to install on Wi
 ### Installing Anaconda
 Anaconda is a library that includes Python and many useful packages for Python, as well as an environment manager called conda that makes package management simple.
 
-Follow the official instrutions of [Anaconda](). Then run the following command at terminal:
+Follow the official instrutions of [Anaconda](https://www.anaconda.com/distribution/). Then run the following command at terminal:
 
 ```
 git clone https://github.com/RuihangWang/CE7490-OSN-Project.git
