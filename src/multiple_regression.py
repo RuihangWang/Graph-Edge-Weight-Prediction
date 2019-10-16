@@ -13,9 +13,9 @@ class Linear_Regression():
         train_w_x = []
         train_w_y = []
         for (u, v, w) in G_n.edges(data='weight'):
-            w_pr = predict_weight(PR, G, G_n, (u, v))
-            w_fg = predict_weight(FG, G, G_n, (u, v))
-            w_sh = predict_weight(SH, G, G_n, (u, v))
+            w_pr = predict_weight(PR, G, G_n, (u, v))[1]
+            w_fg = predict_weight(FG, G, G_n, (u, v))[1]
+            w_sh = predict_weight(SH, G, G_n, (u, v))[1]
             w_x = [w_pr, w_fg, w_sh]
             train_w_x.append(w_x)
             train_w_y.append(w)
@@ -29,9 +29,9 @@ class Linear_Regression():
         self.reg = reg
 
     def cal_w_(self, u, v):
-        w_pr = predict_weight(self.PR, self.G, self.G_n, (u, v))
-        w_fg = predict_weight(self.FG, self.G, self.G_n, (u, v))
-        w_sh = predict_weight(self.SH, self.G, self.G_n, (u, v))
+        w_pr = predict_weight(self.PR, self.G, self.G_n, (u, v))[1]
+        w_fg = predict_weight(self.FG, self.G, self.G_n, (u, v))[1]
+        w_sh = predict_weight(self.SH, self.G, self.G_n, (u, v))[1]
         w_ = float(self.reg.predict(np.array([[w_pr, w_fg, w_sh]])))
         return w_
 

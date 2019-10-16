@@ -46,8 +46,9 @@ def predict_weight(WSN_method, G, G_n, u_v_edge=None):
 
     if u_v_edge is not None:
         (u, v) = u_v_edge
+        w = G[u][v]['weight']
         w_ = WSN_method.cal_w_(u, v)
-        return w_
+        return w, w_
 
     for (u, v, w) in G.edges(data='weight'):
         if G_n.has_edge(u, v):
