@@ -1,3 +1,6 @@
+
+
+
 """
     Experiment for
     Leave N% out
@@ -49,25 +52,25 @@ if __name__ == "__main__":
         TS = Triadic_Status(G_n)
         LR = Linear_Regression(G,G_n,PR,FG,SH)
 
-        RMSE['PR'].append(predict_weight(PR, G, G_n, (u, v))[0])
-        RMSE['BG'].append(predict_weight(BG, G, G_n, (u, v))[0])
-        RMSE['FG'].append(predict_weight(FG, G, G_n, (u, v))[0])
-        RMSE['RP'].append(predict_weight(RP, G, G_n, (u, v))[0])
-        RMSE['SH'].append(predict_weight(SH, G, G_n, (u, v))[0])
-        RMSE['ST'].append(predict_weight(ST, G, G_n, (u, v))[0])
-        RMSE['TB'].append(predict_weight(TB, G, G_n, (u, v))[0])
-        RMSE['TS'].append(predict_weight(TS, G, G_n, (u, v))[0])
-        RMSE['LR'].append(predict_weight(LR, G, G_n, (u, v))[0])
+        RMSE['PR'].append(predict_weight(PR, G, G_n)[0])
+        RMSE['BD'].append(predict_weight(BD, G, G_n)[0])
+        RMSE['FG'].append(predict_weight(FG, G, G_n)[0])
+        RMSE['RP'].append(predict_weight(RP, G, G_n)[0])
+        RMSE['SH'].append(predict_weight(SH, G, G_n)[0])
+        RMSE['ST'].append(predict_weight(ST, G, G_n)[0])
+        RMSE['TB'].append(predict_weight(TB, G, G_n)[0])
+        RMSE['TS'].append(predict_weight(TS, G, G_n)[0])
+        RMSE['LR'].append(predict_weight(LR, G, G_n)[0])
 
-        PCC['PR'].append(predict_weight(PR, G, G_n, (u, v))[1])
-        PCC['BG'].append(predict_weight(BG, G, G_n, (u, v))[1])
-        PCC['FG'].append(predict_weight(FG, G, G_n, (u, v))[1])
-        PCC['RP'].append(predict_weight(RP, G, G_n, (u, v))[1])
-        PCC['SH'].append(predict_weight(SH, G, G_n, (u, v))[1])
-        PCC['ST'].append(predict_weight(ST, G, G_n, (u, v))[1])
-        PCC['TB'].append(predict_weight(TB, G, G_n, (u, v))[1])
-        PCC['TS'].append(predict_weight(TS, G, G_n, (u, v))[1])
-        PCC['LR'].append(predict_weight(LR, G, G_n, (u, v))[1])
+        PCC['PR'].append(predict_weight(PR, G, G_n)[1])
+        PCC['BD'].append(predict_weight(BD, G, G_n)[1])
+        PCC['FG'].append(predict_weight(FG, G, G_n)[1])
+        PCC['RP'].append(predict_weight(RP, G, G_n)[1])
+        PCC['SH'].append(predict_weight(SH, G, G_n)[1])
+        PCC['ST'].append(predict_weight(ST, G, G_n)[1])
+        PCC['TB'].append(predict_weight(TB, G, G_n)[1])
+        PCC['TS'].append(predict_weight(TS, G, G_n)[1])
+        PCC['LR'].append(predict_weight(LR, G, G_n)[1])
 
     RMSE_stack = np.vstack((RMSE['PR'], RMSE['BD'], RMSE['FG'], 
                             RMSE['RP'], RMSE['SH'], RMSE['ST'], 
@@ -80,8 +83,8 @@ if __name__ == "__main__":
     df_RMSE = pd.DataFrame(RMSE_stack, index = algorithm_type, columns = percentages)
     df_PCC = pd.DataFrame(PCC_stack, index = algorithm_type, columns = percentages)
 
-    df_RMSE.to_csv('../results/leave_one_rmse_{}'.format(filename))
-    df_PCC.to_csv('../results/leave_one_pcc_{}'.format(filename))
+    df_RMSE.to_csv('../results/leave_N_rmse_{}'.format(filename))
+    df_PCC.to_csv('../results/leave_N_pcc_{}'.format(filename))
 
     print('RMSE:',df_RMSE)
     print('\nPCC:',df_PCC)
