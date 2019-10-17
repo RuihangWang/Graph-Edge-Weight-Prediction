@@ -1,6 +1,3 @@
-"""
-Page Rank
-"""
 import networkx as nx
 
 class Page_Rank:
@@ -14,7 +11,6 @@ class Page_Rank:
         PR_total_out = {}
         PR_total_in = {}
 
-        # 对G_PR图的所有节点n计算out edge和in edge的边权重在PageRank值上的加权平均
         for (u, w) in G_PR.nodes(data='weight'):
             w_in_v = 0
             w_out_v = 0
