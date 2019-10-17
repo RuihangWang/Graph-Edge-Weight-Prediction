@@ -1,0 +1,19 @@
+% !TeX root = ../OSN.tex
+
+\subsection{PageRank}
+
+We first compute Page Rank ($\omega PR$) value of every vertex(k) in an unsigned graph according to \cite{brin1998anatomy}:
+
+\begin{equation}
+\omega PR(k) = \frac{1 - \alpha}{\left | V \right|} + \alpha \sum_{z\in in(k)}\frac{\omega PR(z) * W(z,k)}{\left | out(z) \right |}
+\end{equation}
+
+$\alpha$ is the probability called damping factor meaning a person will continue clicking on links(travelling in graph), and we set $\alpha$ to 0.85. $\left |V\right |$ is the number of all nodes. Eventually, $\omega PR(k)$ will converge to the probability that a person will go and stay at node k.
+
+Then we compute edge weight of $(u,v)$ using weighted average of PageRank values:
+
+\begin{equation}
+W(u,v) = \frac{\sum_{z\in out(u)} \omega PR(z)*W(u,z) + \sum_{z\in in(v)} \omega PR(z)*W(z,v)}
+{\sum_{z\in out(u)}\omega PR(z) + \sum_{z\in in(v)}\omega PR(z)}
+\end{equation}
+
