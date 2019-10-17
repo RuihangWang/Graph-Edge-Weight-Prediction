@@ -31,7 +31,7 @@ To see if you've successfully activated environment, try to run 'test.py' with
 python test.py
 ```
 
-The outputs should be [0.13, 0.08, -0.14, -0.33, 0.73, -1]
+The outputs should be {'1': 0.13333340816497807, '2': 0.08840581470882135, '3': -0.14492748120868965} {'1': -0.3536232588352854, '2': 0.7333331836700439, '3': -1.0}
 
 ## Running Experiments
 
@@ -54,10 +54,10 @@ cd exp
 python plot.py
 ```
 
-The figures are shown like this:
+Example figures of BTCAlphaNet are shown like follows:
 
-![result pic](./results/fig1.png)
-![result pic](./results/fig2.png)
+![result pic](./results/BTCAlphaNet_pcc.png)
+![result pic](./results/BTCAlphaNet_rmse.png)
 
 ## Avaliable dataset
 When running the experiments, the currently avaliable datasets are stored in '../dataset'. Additional datasets can be downloaded from https://cs.stanford.edu/~srijan/wsn/data/data-wsn.zip

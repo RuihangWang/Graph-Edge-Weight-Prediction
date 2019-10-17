@@ -58,6 +58,9 @@ class Bias_Deserve():
             except:
                 des[node] = 0
         return bias, des
+    
+    def compute_bias_des(self, G):
+        return self.bias, self.des
 
     def cal_w_(self, u, v):
         return self.des[v]
