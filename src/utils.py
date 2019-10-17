@@ -63,8 +63,7 @@ def predict_weight(WSN_method, G, G_n, u_v_edge=None):
 
 def init_Graph(filename, path):
     """
-
-    :param filename: Network.csv
+    :param filename: Network.csv, path
     :return: nx.DiGraph()
     """
     G = nx.DiGraph()

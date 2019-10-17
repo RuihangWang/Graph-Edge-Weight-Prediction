@@ -60,4 +60,4 @@ Example figures of BTCAlphaNet are shown like follows:
 ![result pic](./results/BTCAlphaNet_rmse.png)
 
 ## Avaliable dataset
-When running the experiments, the currently avaliable datasets are stored in '../dataset'. Additional datasets can be downloaded from https://cs.stanford.edu/~srijan/wsn/data/data-wsn.zip
+The currently avaliable datasets are stored in '../dataset'. Additional datasets can be downloaded from https://cs.stanford.edu/~srijan/wsn/data/data-wsn.zip

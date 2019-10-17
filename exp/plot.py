@@ -3,6 +3,7 @@ import plotly.graph_objects as go
 
 print("Possible results: leave_N_pcc/rmse_+'dataset' \n e.g. leave_N_pcc_BTCAlphaNet.csv, leave_N_rmse_BTCAlphaNet.csv")
 print('\nAvaliable datset: BTCAlphaNet.csv, OTCNet.csv, RFAnet.csv\n')
+
 path = '../results/'
 filename = input('Input results:')
 

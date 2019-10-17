@@ -1,11 +1,9 @@
 import networkx as nx
 from src.bias_deserve import Bias_Deserve
 
-
 G = nx.DiGraph()
 
 f = open('test.csv',"r")
-
 for l in f:
     ls = l.strip().split(",")
     G.add_edge(ls[0], ls[1], weight = float(ls[2]))
