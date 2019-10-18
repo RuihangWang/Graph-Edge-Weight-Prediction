@@ -2,4 +2,19 @@
 
 \subsection{Signed-Hits}
 
-The prediction is computed by using a modified version of HITS for signed network, called Signed-HITS\cite{shahriari2014ranking}. Signed-HITS will compute the hub and authority scores of every node separately on 
+The prediction is computed by using a modified version of HITS for signed network, called Signed-HITS\cite{shahriari2014ranking}. Signed-HITS will compute the hub and authority scores of every node separately on positive graph(all edges' weights are positive) and negative graph, using the euqation:
+
+\begin{equation}
+\begin{aligned}
+h^+(u) = \sum_{v\in out^+(v)}{a^+(v)} ; a^+(u) = \sum_{v\in ^+(u)}{h^+(v)}\\
+h^-(u) = \sum_{v\in out^-(v)}{a^-(v)} ; a^-(u) = \sum_{v\in ^-(u)}{h^-(v)}
+\end{aligned}
+\end{equation}
+
+after convergence, we assign the authority score $a(u)=a^+(u)-a^-(u)$ and hub score $h(u)=h^+(u)-h^-(u)$ to each vertex $u$. Authority scores estimate the node value based on the incoming links, while hub scores estimate the node value based on outgoing links. However, the paper\cite{kumar2016edge} didn't deliver the method to compute edge weight by using the authority score and hub score. Again, we use weighted average to compute the weight prediction:
+
+\begin{equation}
+W(u,v) = \frac{h(u)*\sum_{z\in out(u)} W(u,z) + a(v)*\sum_{z\in in(v)} W(z,v)}{h(u) * |V_{z\in out(u)}| + a(v) * |V_{z\in in(v)}|}
+\end{equation}
+
+In this equation, we use $h(u)$ to be the weight of all out-going edges and $a(v)$ to be the weight of all in-coming edges. The reason is that $h(u)$ represents the node value based on out-going edges. So the predicted weight of out-edges from $u$ should be higher if $h(u)$ is high. Likewise, the predicted weight of in-edges into $v$ should be higher if $a(v)$ is high.

@@ -1,0 +1,5 @@
+% !TeX root = ../OSN.tex
+
+\subsection{Linear Regression}
+
+In this experiment, we use a linear regression model to predict the weight of edge. Our features are generated from some algorithms mentioned above. First, the test edge $e_t$ whose weight is to be predicted is removed from the network. Second, we remove the second edge $e_s$ and predict the weight of $e_s$ from the rest of the edges. And the predicted value of $e_s$ will be the feature and the true value of $e_s$ will be the ground truth. The second step is done multiple times to generate enough samples for training. After training, we use this model to predict the value of the removed edge $e_t$.
