@@ -19,3 +19,5 @@
 *.blg
 *.fdb_latexmk
 *.synctex.gz
+
+.ipynb_checkpoints
