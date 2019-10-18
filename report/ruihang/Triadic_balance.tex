@@ -1,0 +1,21 @@
+% !TeX root = ../OSN.tex
+\subsection{Triadic balance}
+This definition is derived directly from
+balance theory according to \cite{}. The algorithm takes the average product of edge weights for all incomplete triads
+that the edge ($u,v$) is a part of. Incomplete triads are triads that would form involving
+edge ($u,v$) after it is created. To be specific, let $U_n$ and $V_n$ denotes the set of
+neighbors of vertex $u$ and $v$, repectively. To find all possible triads, vertexes with
+both connections of $u$ and $v$ are obtained by $N = U_n \cap V_n$. When $N = \emptyset$，
+the weight of ($u,v$) is set to 0. Then, the weight of ($u,v$)
+is predicted by:
+
+\begin{equation}
+W(u,v) = 
+\begin{cases}
+\frac{\sum_{n\in N}W(u,n)+W(n,u)+W(v,n)+W(n,v)}{M}, & \text{if $N \neq \emptyset$} \\
+0, & \text{otherwise}
+\end{cases}
+\end{equation}
+
+where M is number of vertexes in set $N$, $W(u,n), W(n,u), W(v,n), W(n,v)$ are weights of each edge connected
+to $u$ or $v$ of vertexes in set $N$, repectively.

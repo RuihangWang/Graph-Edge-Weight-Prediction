@@ -1,0 +1,34 @@
+% !TeX root = ../OSN.tex
+
+\subsection{Bias and Deserve}
+
+This method is proposed by Mishra and Bhattacharya in \cite{}.
+To compute "bias" and "deserve", we should first normalize the ratings (weights),
+and keep them in the range of [-1, 1] where 0 is a neutral opinion. Then, we say node $u$ gives a trust-score
+of $w_ij$ to node $v$ for a given rating of ($u, v$). The two attributes of a node are 
+defined by:
+
+\begin{itemize}
+	\item \emph{Bias}: This reflects the expected weight of an outgoing edge.  
+	\item \emph{Deserve}: This reflects the expected weight of an incoming edge from an unbiased vertex.
+\end{itemize}
+
+Let $d^o(u)$ denotes the set of all outgoing edges from vertex $u$ and likewise,
+$d^i(u)$ denotes the set of all incoming links to node $u$. Then, bias (BIAS) and
+deserve (DES) are iteratively computed as:
+
+\begin{equation}
+    BIAS^{(t+1)}(u)=\frac{1}{å2|d^o(u)|}\sum_{v \in d^o(u)}[W(u,v) - DES^t(v)]
+\end{equation}
+
+\begin{equation}
+    DES^{(t+1)}(u)=\frac{1}{å2|d^i(u)|}\sum_{v \in d^i(u)}[W(v,u)(1 - X^t(v,u))]
+\end{equation}
+
+where $X^t(v,u) = max\{0, BIAS^t(v) \times W(v,u)\}$. The interative formulations
+of bias and deserve allow us to predict the weight of (u,v) based on the deserve
+value $DES(v)$ of vertex $v$. Thus, the weight is directly predicted by:
+
+\begin{equation}
+    W(u,v) = DES(v)
+\end{equation}
