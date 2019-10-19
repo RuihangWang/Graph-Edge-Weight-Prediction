@@ -2,6 +2,28 @@
 
 \section{Performance Evaluation}
 
+\begin{table}[htbp]
+\centering
+\caption{Performance of different algorithms for edge weight prediction in leave-one-out experiment on different datasets. Each cell is (RMSE, PCC). Lower RMSE and higher PCC are better.}
+	\begin{tabular}{l||c|c|c}
+	\toprule
+	\textbf{Algorithms}& \textbf{BTCAlphaNet} & \textbf{OTCNet} & \textbf{RFANet}\\ \hline
+	& \multicolumn{3}{c}{Existing Algorithms} \\ \hline
+	PageRank           & (0.29,0.25) & (0.35,0.30) & (0.21,0.48)\\ \hline
+	Bias Deserve      & (0.23,0.60) & (0.28,0.61) & (0.21,0.48)\\ \hline
+	Reciprocal         & (0.28,0.44) & (0.33,0.47) & (0.35,0.00)\\ \hline
+	Signed HITS       & (0.23,0.66) & (0.27,0.69) & (0.23,0.44)\\ \hline
+	Status Theory     & (0.45,0.00) & (0.48,-0.01)& (0.39,-0.15)\\ \hline
+	Triadic Balance   & (0.31,0.21) & (0.36,0.28) & (0.24,0.29)\\ \hline
+	Triadic Status    & (0.35,0.24) & (0.37,0.42) & (0.32,0.27)\\ \hline
+	& \multicolumn{3}{c}{Fairness and Goodness} \\ \hline
+	Fairness and Goodness & (0.24,0.60) & (0.28,0.63) & (0.22,0.46)\\ \hline
+	& \multicolumn{3}{c}{Linear Regression} \\ \hline
+	Linear Regression & (0.22,0.67) & (0.25,0.72) & (0.20,0.54)\\ \hline
+	\end{tabular}
+\end{table}
+
+
 \begin{filecontents*}{leave_N_rmse_BTCAlphaNet.csv}
 percentage,PageRank,Bias_Deserve,Fairness_Goodness,Reciprocal,Signed_HITS,Status_Theory,Triadic_Balance,Triadic_Status,Linear_Regression
 10,0.2862059,0.265034144,0.261037457,0.267165064,0.255734648,0.44601129,0.285025372,0.343535,0.26161892
@@ -176,3 +198,10 @@ percentage,PageRank,Bias_Deserve,Fairness_Goodness,Reciprocal,Signed_HITS,Status
 	\end{tikzpicture}
 	\caption{RFAnet}
 \end{figure}
+
+
+
+
+
+
+
