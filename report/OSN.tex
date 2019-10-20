@@ -104,19 +104,21 @@
 
 \section{Introduction}
 
-[Context] A number of weighted signed networks (WSN) exist in our world while many of them are incomplete. The values for weights prediction are ...
+With the rapid development of information technology, social network has become a significant part of modern life. As remarkable number of messages reflecting opinion and attitude flowing on the network, social network analysis gradually gains popularity in a wide range of fields including political science, social psychology and business analysis. Social network analysis offers a tool to seek for insight through the structure of social networks but is limited by the complexity. Users are developing rich relationships through networks while analysis tools are generally reducing the relationships to simple links. To cover the gap between simplicity of network simulation and complexity of real relationships is a remarkable research topic. 
 
-[Existing Solutions] State-of-the-art fairness and goodness. Baselines: Reciprocal, Triadic balance, Triadic Status, Pagerank ....
+In social network, people show different attitudes towards connection to others. The richness of a social network contains positive and negative interactions. The main part of connections are positive ones, including connecting with friends, fans, and followers. There also exist negative connections, including scammers, political enemy and opponents. These connections can be used to predict relationships between independent users. For example, a politician might look at such people as potential voters for him if he has strength in that particular topic of interest. In the same vein, we might wish to estimate how much a person P1 agrees/disagrees with people who are already positive or negative about a product in order to quantify if they are more likely to be target customers of the product. Moreover, edge weight prediction may be useful to improve traditional tasks in signed networks such as node ranking\cite{shahriari2014ranking}, anomaly detection\cite{Kmumar2014}\cite{Wu:2016:TMR:2835776.2835816}, network analysis\cite{Kumar:2016:SDS:2872518.2889391}\cite{leskovec2010signed}, community detection\cite{PhysRevE.80.036115}, information diffusion\cite{Shafaei_2014} \cite{Li2014} and sentiment prediction\cite{west2014}. Therefore, the prediction of edge weights in WSNs can be advantageous in various tasks, both when WSNs are explicit and implicit.
 
-[Our project]  To better understand theories and master practical skills, we investigate and implement a common set of algorithms and evaluate their performance on real-world datasets. 
-
-The rest of the paper is structured as follows: Section 2 presents related work in this topic. Section 3 describes the overview of our project. Section 4 formulates the problem of weight prediction in weighted signed networks. Section 5 conducted experiments on real-world datasets using different algorithms. Section 6 evaluates the performance of all tested methods. The conclusion is summarized in Section 7.
+To better understand theories and master practical skills, we investigate and implement a common set of algorithms and evaluate their performance on real-world datasets. The rest of the paper is structured as follows: Section 2 presents related work in this topic. Section 3 describes the overview of our project. Section 4 formulates the problem of weight prediction in weighted signed networks. Section 5 conducted experiments on real-world datasets using different algorithms. Section 6 evaluates the performance of all tested methods. The conclusion is summarized in Section 7.
 
 
 \section{Related Work}
-\textbf{Edge Sign Prediction in SSNs} ...
+\textbf{Edge Sign Prediction in SSNs} The very early work in SSN mainly based on balance and status. The first of these theories is structural balance theory, which originated in social psychology in the mid-20th-century. As formulated by Heider in the 1940s\cite{heider1940}, and subsequently cast in graph-theoretic language by Cartwright and Harary\cite{Cartwright1956-CARSBA-4}, structural balance considers the possible ways in which triangles on three individuals can be signed, and posits that triangles with three positive signs and those with one positive sign are more plausible — and hence should be more prevalent in real networks — than triangles with two positive signs or none. Balanced triangles with three positive edges exemplify the principle that “the friend of my friend is my friend,” whereas those with one positive and two negative edges capture the notions that “the friend of my enemy is my enemy,” “the enemy of my friend is my enemy,” and “the enemy of my enemy is my friend.” Structural balance theory has been developed extensively in the time since this initial work\cite{wasserman1994social}, including the formulation of a variant “weak structural balance” proposed by Davis in the 1960s \cite{Davis1967}as a way of eliminating the assumption that “the enemy of my enemy is my friend”. Weak structural balance posits that only triangles with exactly two positive edges are implausible in real networks, and that all other kinds of triangles should be permissible.
 
-\textbf{Edge Weight Prediction in Social Networks} ...
+Balance theory can be viewed as a model of likes and dislikes. However, as Guha et al. observe in the context of Epinions\cite{Guha:2004:PTD:988672.988727}, a signed link from P1 to P2 can have more than one possible interpretation, depending on P1’s intention in creating the link. In particular, a positive link from P1 may mean, “P2 is my friend,” but it also may mean, “I think P2 has higher status than I do.” Similarly, a negative link from P1 to P2 may mean “P2 is my enemy” or “I think P2 has lower status than I do.”
+
+Later work have developed features and models to predict the sign of an edge random-walk and trust-propagation algorithms\cite{Dubois}\cite{Guha:2004:PTD:988672.988727}, and using social interaction information for prediction\cite{Yang2012}\cite{Tang:2016:SSN:2988524.2956185}. Metric Multidimensional Scaling (MDS) assigns an m-dimensional position to vertices in a SSN or WSN to minimize ‘stress’, based on extended balance theory\cite{Qian:2014:FTD:2639948.2628438}. It then uses the metric distance between two vertices to predict the sign of an edge between them. All of these papers predict edge sign in unweighted SSNs, while fairness and goodness method predicts the weight of an edge along with its sign. 
+
+\textbf{Edge Weight Prediction in Social Networks} There is substantial work on predicting edge weights in unsigned social networks. Communication based features have been shown to be very important in quantifying the edge weights between users\cite{Gilbert:2012:PTS:2145204.2145360}\cite{Gilbert:2009:PTS:1518701.1518736}\cite{Xiang:2010:MRS:1772690.1772790}\cite{Kahanda2009}, but since we only have the WSN without any communication information, we compare with non-communication based techniques. These include baselines such as reciprocal edge weight\cite{Gilbert:2012:PTS:2145204.2145360} and triadic balance and status measures\cite{Gilbert:2009:PTS:1518701.1518736}\cite{Sintos:2014:UST:2623330.2623664}. Two popular unsupervised algorithms are EigenTrust\cite{Kamvar:2003:EAR:775152.775242} and TidalTrust\cite{Katz2006}. EigenTrust calculates a global value of trust for each vertex by finding the left eigenvector of a normalized trust matrix. TidalTrust calculates the trust from a source to a sink, by recursively propagating trust via the sink’s predecessors till it reaches the source. A very recent work in this direction is trustingness and trustworthiness\cite{Roy2016}. However, these papers deal with edge weight prediction in unsigned social networks, while WSN is a new problem deriving from SSN. So in this paper, these techniques are implemented and compared with fairness and goodness method as benchmark models.
 
 \section{Project Overview}
 
@@ -125,13 +127,15 @@ In this project, we extensively investigate and experiment methods for edge weig
 \begin{enumerate}
 	\item Literature review on OSN and select a topic about predicting weight of edges for weighted signed network.
 	
-	\item Investigate the state-of-the-art algorithms \emph{fairness-goodness} in [ ] and  studied a common set of baselines for weight prediction.
+	\item Investigate the state-of-the-art algorithms \emph{fairness-goodness} in\cite{kumar2016edge} and  studied a common set of baselines for weight prediction.
 	
 	\item Conducted experiments on each algorithm and reproduce the results mentioned in original paper using real-world dataset.
 	
-	\emph{Experimental 1 -   Removing one edge prediction} : ...
+	\emph{Experimental 1 -   Removing one edge prediction} : When we remove one of the edges from the network and try to predict it from the rest of network structure one at a time, we compared fairness and goodness metrics with other typical methods and noticed that fairness and goodness method produces almost the best result. 
 	
-	\emph{Experimental 2 -  Removing N \%-out edge prediction} : ...
+	\emph{Experimental 2 -  Removing N \%-out edge prediction} : When we remove N\% of the edges from the network and try to predict them from each of the individual features, we see that in all cases, fairness and goodness metrics are the best.
+	4. Evaluate results of different methods
+	
 	
 	\item Evaluate results of different methods.
 \end{enumerate}
@@ -157,7 +161,12 @@ In this project, we extensively investigate and experiment methods for edge weig
 
 \input{shenmeng/linear_regression}
 
+
+
+\section{Performance Evaluation}
+
 \input{shenmeng/performance_evaluation}
+
 
 \section{Conclusion}
 

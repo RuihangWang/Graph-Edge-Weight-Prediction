@@ -1,0 +1,169 @@
+\begin{thebibliography}{10}
+
+\bibitem{shahriari2014ranking}
+Moshen Shahriari and Mahdi Jalili.
+\newblock Ranking nodes in signed social networks.
+\newblock {\em Social network analysis and mining}, 4(1):172, 2014.
+
+\bibitem{Kmumar2014}
+S.~{Kmumar}, F.~{Spezzano}, and V.~S. {Subrahmanian}.
+\newblock Accurately detecting trolls in slashdot zoo via decluttering.
+\newblock In {\em 2014 IEEE/ACM International Conference on Advances in Social
+  Networks Analysis and Mining (ASONAM 2014)}, pages 188--195, 2014.
+
+\bibitem{Wu:2016:TMR:2835776.2835816}
+Zhaoming Wu, Charu~C. Aggarwal, and Jimeng Sun.
+\newblock The troll-trust model for ranking in signed networks.
+\newblock In {\em Proceedings of the Ninth ACM International Conference on Web
+  Search and Data Mining}, WSDM '16, pages 447--456, New York, NY, USA, 2016.
+  ACM.
+
+\bibitem{Kumar:2016:SDS:2872518.2889391}
+Srijan Kumar.
+\newblock Structure and dynamics of signed citation networks.
+\newblock In {\em Proceedings of the 25th International Conference Companion on
+  World Wide Web}, WWW '16 Companion, pages 63--64, Republic and Canton of
+  Geneva, Switzerland, 2016. International World Wide Web Conferences Steering
+  Committee.
+
+\bibitem{leskovec2010signed}
+Jure Leskovec, Daniel Huttenlocher, and Jon Kleinberg.
+\newblock Signed networks in social media.
+\newblock In {\em Proceedings of the SIGCHI conference on human factors in
+  computing systems}, pages 1361--1370. ACM, 2010.
+
+\bibitem{PhysRevE.80.036115}
+V.~A. Traag and Jeroen Bruggeman.
+\newblock Community detection in networks with positive and negative links.
+\newblock {\em Phys. Rev. E}, 80:036115, Sep 2009.
+
+\bibitem{Shafaei_2014}
+Mahsa Shafaei and Mahdi Jalili.
+\newblock Community structure and information cascade in signed networks.
+\newblock {\em New Generation Computing}, 32(3-4):257--269, aug 2014.
+
+\bibitem{Li2014}
+Dong Li, Zhi-Ming Xu, Nilanjan Chakraborty, Anika Gupta, Katia Sycara, and
+  Sheng Li.
+\newblock Polarity related influence maximization in signed social networks.
+\newblock {\em PloS one}, 9:e102199, 07 2014.
+
+\bibitem{west2014}
+Robert West, Hristo Paskov, Jure Leskovec, and Christopher Potts.
+\newblock Exploiting social network structure for person-to-person sentiment
+  analysis.
+\newblock {\em Transactions of the Association for Computational Linguistics},
+  2, 09 2014.
+
+\bibitem{heider1940}
+Fritz Heider.
+\newblock Attitudes and cognitive organization.
+\newblock {\em The Journal of Psychology}, 21(1):107--112, 1946.
+\newblock PMID: 21010780.
+
+\bibitem{Cartwright1956-CARSBA-4}
+Dorwin Cartwright and Frank Harary.
+\newblock Structural balance: A generalization of heider's theory.
+\newblock {\em Psychological Review}, 63(5):277--293, 1956.
+
+\bibitem{wasserman1994social}
+S.~Wasserman, K.~Faust, Cambridge~University Press, M.~Granovetter, University
+  of~Cambridge, and D.~Iacobucci.
+\newblock {\em Social Network Analysis: Methods and Applications}.
+\newblock Structural Analysis in the Social Sciences. Cambridge University
+  Press, 1994.
+
+\bibitem{Davis1967}
+James~A. Davis.
+\newblock Clustering and structural balance in graphs.
+\newblock {\em Human Relations}, 20(2):181--187, 1967.
+
+\bibitem{Guha:2004:PTD:988672.988727}
+R.~Guha, Ravi Kumar, Prabhakar Raghavan, and Andrew Tomkins.
+\newblock Propagation of trust and distrust.
+\newblock In {\em Proceedings of the 13th International Conference on World
+  Wide Web}, WWW '04, pages 403--412, New York, NY, USA, 2004. ACM.
+
+\bibitem{Dubois}
+Thomas Dubois, Jennifer Golbeck, and Aravind Srinivasan.
+\newblock Predicting trust and distrust in social networks.
+\newblock pages 418--424, 10 2011.
+
+\bibitem{Yang2012}
+Shuang-Hong Yang, Alexander Smola, Bo~Long, Hongyuan Zha, and Yi~Chang.
+\newblock Friend or frenemy? predicting signed ties in social networks.
+\newblock {\em SIGIR'12 - Proceedings of the International ACM SIGIR Conference
+  on Research and Development in Information Retrieval}, 08 2012.
+
+\bibitem{Tang:2016:SSN:2988524.2956185}
+Jiliang Tang, Yi~Chang, Charu Aggarwal, and Huan Liu.
+\newblock A survey of signed network mining in social media.
+\newblock {\em ACM Comput. Surv.}, 49(3):42:1--42:37, August 2016.
+
+\bibitem{Qian:2014:FTD:2639948.2628438}
+Yi~Qian and Sibel Adali.
+\newblock Foundations of trust and distrust in networks: Extended structural
+  balance theory.
+\newblock {\em ACM Trans. Web}, 8(3):13:1--13:33, July 2014.
+
+\bibitem{Gilbert:2012:PTS:2145204.2145360}
+Eric Gilbert.
+\newblock Predicting tie strength in a new medium.
+\newblock In {\em Proceedings of the ACM 2012 Conference on Computer Supported
+  Cooperative Work}, CSCW '12, pages 1047--1056, New York, NY, USA, 2012. ACM.
+
+\bibitem{Gilbert:2009:PTS:1518701.1518736}
+Eric Gilbert and Karrie Karahalios.
+\newblock Predicting tie strength with social media.
+\newblock In {\em Proceedings of the SIGCHI Conference on Human Factors in
+  Computing Systems}, CHI '09, pages 211--220, New York, NY, USA, 2009. ACM.
+
+\bibitem{Xiang:2010:MRS:1772690.1772790}
+Rongjing Xiang, Jennifer Neville, and Monica Rogati.
+\newblock Modeling relationship strength in online social networks.
+\newblock In {\em Proceedings of the 19th International Conference on World
+  Wide Web}, WWW '10, pages 981--990, New York, NY, USA, 2010. ACM.
+
+\bibitem{Kahanda2009}
+Indika Kahanda and Jennifer Neville.
+\newblock Using transactional information to predict link strength in online
+  social networks.
+\newblock 01 2009.
+
+\bibitem{Sintos:2014:UST:2623330.2623664}
+Stavros Sintos and Panayiotis Tsaparas.
+\newblock Using strong triadic closure to characterize ties in social networks.
+\newblock In {\em Proceedings of the 20th ACM SIGKDD International Conference
+  on Knowledge Discovery and Data Mining}, KDD '14, pages 1466--1475, New York,
+  NY, USA, 2014. ACM.
+
+\bibitem{Kamvar:2003:EAR:775152.775242}
+Sepandar~D. Kamvar, Mario~T. Schlosser, and Hector Garcia-Molina.
+\newblock The eigentrust algorithm for reputation management in p2p networks.
+\newblock In {\em Proceedings of the 12th International Conference on World
+  Wide Web}, WWW '03, pages 640--651, New York, NY, USA, 2003. ACM.
+
+\bibitem{Katz2006}
+Yarden Katz and Jennifer Golbeck.
+\newblock Social network-based trust in prioritized default logic.
+\newblock volume~2, 01 2006.
+
+\bibitem{Roy2016}
+A.~{Roy}, C.~{Sarkar}, J.~{Srivastava}, and J.~{Huh}.
+\newblock Trustingness trustworthiness: A pair of complementary trust measures
+  in a social network.
+\newblock In {\em 2016 IEEE/ACM International Conference on Advances in Social
+  Networks Analysis and Mining (ASONAM)}, pages 549--554, Aug 2016.
+
+\bibitem{kumar2016edge}
+Srijan Kumar, Francesca Spezzano, VS~Subrahmanian, and Christos Faloutsos.
+\newblock Edge weight prediction in weighted signed networks.
+\newblock In {\em 2016 IEEE 16th International Conference on Data Mining
+  (ICDM)}, pages 221--230. IEEE, 2016.
+
+\bibitem{brin1998anatomy}
+Sergey Brin and Lawrence Page.
+\newblock The anatomy of a large-scale hypertextual web search engine.
+\newblock {\em Computer networks and ISDN systems}, 30(1-7):107--117, 1998.
+
+\end{thebibliography}
