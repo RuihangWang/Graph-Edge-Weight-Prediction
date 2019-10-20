@@ -1,7 +1,8 @@
 import pandas as pd
 import plotly.graph_objects as go 
 
-print("Possible results: leave_N_pcc/rmse_+'dataset' \n e.g. leave_N_pcc_BTCAlphaNet.csv, leave_N_rmse_BTCAlphaNet.csv")
+print("\nPossible results: leave_N_pcc/rmse_+'dataset' \n")
+print("e.g. leave_N_pcc_BTCAlphaNet.csv, leave_N_rmse_BTCAlphaNet.csv")
 print('\nAvaliable datset: BTCAlphaNet.csv, OTCNet.csv, RFAnet.csv\n')
 
 path = '../results/'
@@ -52,7 +53,7 @@ try:
         fig.write_image('../results/{}_rmse.png'.format(filename[13:-4]))
 
     elif 'pcc' in filename:
-        fig.update_layout(title='PCC variation{}'.format(filename[12:-4]),
+        fig.update_layout(title='PCC variation of {}'.format(filename[12:-4]),
                         xaxis_title='Percentages of edges removed',
                         yaxis_title='Pearson Correlation Coeff.')
         fig.write_image('../results/{}_pcc.png'.format(filename[12:-4]))

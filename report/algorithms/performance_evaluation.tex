@@ -1,5 +1,35 @@
 % !TeX root = ../OSN.tex
 
+We implemented two series of experiments to evaluate the 
+performance of fairness and goodness method on three public 
+WSN dataset mentioned above. 
+
+Experiment1:leave-one-out prediction
+In these experiments, one weighted edge is removed at a time 
+and nine algorithms are implemented to predict the weight of 
+test edge, simulating the situation where we want to calculate 
+the weight of a non-existed edge. The root-mean-square error 
+(RMSE) and Pearson correlation coefficient (PCC) are calculated 
+in each loot and the average result is shown in table \ref{table1}. 
+Fairness and goodness method achieved almost the best 
+performance among all datasets and showed robustness. 
+The linear regression result trained by all other features 
+is the best one. 
+
+Experiment2:leave-N\%-out prediction
+In this part, we removed a larger number of edges to further 
+evaluate the performance of F\&G algorithm. We randomly selected 
+N\% of the edges, remove them as test edges and predict their 
+weight from the rest of network. The value of N range from 10 
+to 90 with a step of 10. Figure\ref{figure2}, Figure\ref{figure3} and 
+Figure\ref{figure4} showed average RMSE and PCC results in 
+the three datasets. F\&G method beats most of the algorithms 
+and linear regression method showed robustness and performed 
+nearly the best in all datasets. We noticed that performance of
+ linear regression method showed stability when the percentage 
+ of removed edges varies, meaning that this method can handle 
+ networks partly invisible, especilly online networks 
+ constrained by privacy items. 
 
 
 \begin{table}[htbp]

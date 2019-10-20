@@ -1,0 +1,40 @@
+% !TeX root = ../OSN.tex
+
+\subsection*{A. Real-World Datasets}
+We thank the authors of \cite{} who release the datasets online for research.
+The real-world datasets used for evaluation are summarized in Table 2.
+The listed networks are all directed. i.e. each edge ($u,v$) means that user
+$u$ is expressing an opinion about user $v$. Each edge is associated with a
+weight $W(u,v)$ representing the strength of opinion. The weights for all 
+the networks are normalized in the range of [$-1$, $1$]. The meaning 
+of each network is illustrated as follows:
+
+\emph{\textbf{Bitcoin networks}}. As a cryptocurrency ussed for 
+anonymous trading, Bitcoin is always accompanied with certain risk.
+Therefore, users often rate the level of trust they have in others.
+Based on such exchange, Bitcoin-OTC and Bitcoin-Alpha$^2$ are gatherd
+on a scale between $-10$ and $10$. $-10$ means the person at that node 
+may like be a fraudster, while $10$ means a person can be most trusted.
+Thus, these two exchanges explicitly yield WSNs.
+
+\emph{\textbf{Wikipedia RfA}} Wikipedia Requests for Adminship (RfA) 
+network is a signed network among Wikipedia users where each 
+edge ($u,v$) has a weight corresponding to the vote of user $u$
+($-1$ for negative, 0 for neutral, and 1 for positive) towards user 
+$v$ to become an administrator. To normalize this datasets in the
+range of [$-1$, $1$]. An online sentiment engine is used to quantify
+the strength of each score based on the intensity of the sentiment expressed 
+in its explanation.
+
+\begin{table}[htbp]
+\centering
+\caption{Real-world datasets used for evaluation}
+  \begin{tabular}{l|c|c|c|c}
+  \toprule
+  \textbf{Network}& \textbf{Vertices} & \textbf{Edges} & \textbf{Pos. Edges $\%$} & \textbf{Description of network edges} \\ \hline
+  Bitcoin-Alpha         & 3,783 & 24,186 & $93\%$  & Degree of trust or distrust from Bitcoin user $u$ to $v$ \\ \hline
+  Bitcoin-OTC           & 5,881 & 35,592 & $89\%$  & Degree of trust or distrust from Bitcoin user $u$ to $v$ \\ \hline
+  Wikipedia RfA         & 9,654 & 104,554 & $83.7\%$  & Degree of support or opposition in Wikipedia administrator elections by $u$ to $v$ \\ \hline
+  \end{tabular}
+\end{table}
+
