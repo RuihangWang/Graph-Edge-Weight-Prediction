@@ -21,8 +21,8 @@ In this part, we removed a larger number of edges to further
 evaluate the performance of F\&G algorithm. We randomly selected 
 N\% of the edges, remove them as test edges and predict their 
 weight from the rest of network. The value of N range from 10 
-to 90 with a step of 10. Figure\ref{figure2}, Figure\ref{figure3} and 
-Figure\ref{figure4} showed average RMSE and PCC results in 
+to 90 with a step of 10. Figure\ref{figure3}, Figure\ref{figure4} and 
+Figure\ref{figure5} showed average RMSE and PCC results in 
 the three datasets. F\&G method beats most of the algorithms 
 and linear regression method showed robustness and performed 
 nearly the best in all datasets. We noticed that performance of
@@ -51,6 +51,7 @@ nearly the best in all datasets. We noticed that performance of
 	& \multicolumn{3}{c}{Linear Regression} \\ \hline
 	Linear Regression & (0.22,0.67) & (0.25,0.72) & (0.20,0.54)\\ \hline
 	\end{tabular}
+	\label{table1}
 \end{table}
 
 
@@ -135,8 +136,8 @@ percentage,PageRank,Bias_Deserve,Fairness_Goodness,Reciprocal,Signed_HITS,Status
 \begin{figure}[htbp]
 	\centering
 	\begin{tikzpicture}
-	\pgfplotsset{every axis legend/.append style={at={(-0.2,1.5)},anchor=north},every axis y label/.append style={at={(0.03,0.5)}}}
-	\begin{axis}[xshift=-2.5cm,title= RMSE BTCAlphaNet ,xlabel=Percentage of removed edges, ylabel=RMSE ,xtick =data,legend columns=5,legend style={font=\footnotesize},font=\footnotesize,width=7cm]
+	\pgfplotsset{every axis legend/.append style={at={(-0.5,1.6)},anchor=north},every axis y label/.append style={at={(0.03,0.5)}}}
+	\begin{axis}[xshift=-2.5cm,title= RMSE BTCAlphaNet ,xlabel=Percentage of removed edges, ylabel=RMSE ,xtick =data,legend columns=5,legend style={font=\footnotesize},font=\footnotesize,width=6cm]
 	\addplot table [x=percentage, y=PageRank, col sep=comma] {leave_N_rmse_BTCAlphaNet.csv};
 	\addplot table [x=percentage, y=Bias_Deserve, col sep=comma] {leave_N_rmse_BTCAlphaNet.csv};
 	\addplot table [x=percentage, y=Fairness_Goodness, col sep=comma] {leave_N_rmse_BTCAlphaNet.csv};
@@ -147,7 +148,7 @@ percentage,PageRank,Bias_Deserve,Fairness_Goodness,Reciprocal,Signed_HITS,Status
 	\addplot table [x=percentage, y=Triadic_Status, col sep=comma] {leave_N_rmse_BTCAlphaNet.csv};
 	\addplot table [x=percentage, y=Linear_Regression, col sep=comma] {leave_N_rmse_BTCAlphaNet.csv};
 	\end{axis}
-	\begin{axis}[xshift=5cm,title= PCC BTCAlphaNet ,xlabel=Percentage of removed edges, ylabel=PCC ,xtick =data,legend columns=5,legend style={font=\footnotesize},font=\footnotesize,width=7cm]
+	\begin{axis}[xshift=5cm,title= PCC BTCAlphaNet ,xlabel=Percentage of removed edges, ylabel=PCC ,xtick =data,legend columns=5,legend style={font=\footnotesize},font=\footnotesize,width=6cm]
 	\addplot table [x=percentage, y=PageRank, col sep=comma] {leave_N_pcc_BTCAlphaNet.csv};
 	\addplot table [x=percentage, y=Bias_Deserve, col sep=comma] {leave_N_pcc_BTCAlphaNet.csv};
 	\addplot table [x=percentage, y=Fairness_Goodness, col sep=comma] {leave_N_pcc_BTCAlphaNet.csv};
@@ -158,19 +159,16 @@ percentage,PageRank,Bias_Deserve,Fairness_Goodness,Reciprocal,Signed_HITS,Status
 	\addplot table [x=percentage, y=Triadic_Status, col sep=comma] {leave_N_pcc_BTCAlphaNet.csv};
 	\addplot table [x=percentage, y=Linear_Regression, col sep=comma] {leave_N_pcc_BTCAlphaNet.csv};
 
-	\legend{$$Page Rank, $$Bias Deserve, $$Fairness Goodness, $$Reciprocal, $$Signed HITS, $$Status Theory, $$Triadic Balance, $$Triadic Status, $$Linear Regression}
-
 	\end{axis}
 	\end{tikzpicture}
 	\caption{BTCAlphaNet}
+	\label{figure3}
 \end{figure}
-
-
 \begin{figure}[htbp]
 	\centering
 	\begin{tikzpicture}
-	\pgfplotsset{every axis legend/.append style={at={(-0.2,-0.3)},anchor=north},every axis y label/.append style={at={(0.03,0.5)}}}
-	\begin{axis}[xshift=-2.5cm,title= RMSE OTCNet ,xlabel=Percentage of removed edges, ylabel=RMSE ,xtick =data,legend columns=6,legend style={font=\footnotesize},font=\footnotesize,width=7cm]
+	\pgfplotsset{every axis legend/.append style={at={(-0.5,1.6)},anchor=north},every axis y label/.append style={at={(0.03,0.5)}}}
+	\begin{axis}[xshift=-2.5cm,title= RMSE OTCNet ,xlabel=Percentage of removed edges, ylabel=RMSE ,xtick =data,legend columns=5,legend style={font=\footnotesize},font=\footnotesize,width=6cm]
 	\addplot table [x=percentage, y=PageRank, col sep=comma] {leave_N_rmse_OTCNet.csv};
 	\addplot table [x=percentage, y=Bias_Deserve, col sep=comma] {leave_N_rmse_OTCNet.csv};
 	\addplot table [x=percentage, y=Fairness_Goodness, col sep=comma] {leave_N_rmse_OTCNet.csv};
@@ -181,7 +179,7 @@ percentage,PageRank,Bias_Deserve,Fairness_Goodness,Reciprocal,Signed_HITS,Status
 	\addplot table [x=percentage, y=Triadic_Status, col sep=comma] {leave_N_rmse_OTCNet.csv};
 	\addplot table [x=percentage, y=Linear_Regression, col sep=comma] {leave_N_rmse_OTCNet.csv};
 	\end{axis}
-	\begin{axis}[xshift=5cm,title= PCC OTCNet ,xlabel=Percentage of removed edges, ylabel=PCC ,xtick =data,legend columns=6,legend style={font=\footnotesize},font=\footnotesize,width=7cm]
+	\begin{axis}[xshift=5cm,title= PCC OTCNet ,xlabel=Percentage of removed edges, ylabel=PCC ,xtick =data,legend columns=5,legend style={font=\footnotesize},font=\footnotesize,width=6cm]
 	\addplot table [x=percentage, y=PageRank, col sep=comma] {leave_N_pcc_OTCNet.csv};
 	\addplot table [x=percentage, y=Bias_Deserve, col sep=comma] {leave_N_pcc_OTCNet.csv};
 	\addplot table [x=percentage, y=Fairness_Goodness, col sep=comma] {leave_N_pcc_OTCNet.csv};
@@ -195,14 +193,13 @@ percentage,PageRank,Bias_Deserve,Fairness_Goodness,Reciprocal,Signed_HITS,Status
 	\end{axis}
 	\end{tikzpicture}
 	\caption{OTCNet}
+	\label{figure4}
 \end{figure}
-
-
 \begin{figure}[htbp]
 	\centering
 	\begin{tikzpicture}
-	\pgfplotsset{every axis legend/.append style={at={(-0.2,-0.3)},anchor=north},every axis y label/.append style={at={(0.03,0.5)}}}
-	\begin{axis}[xshift=-2.5cm,title= RMSE RFAnet ,xlabel=Percentage of removed edges, ylabel=RMSE ,xtick =data,legend columns=6,legend style={font=\footnotesize},font=\footnotesize,width=7cm]
+	\pgfplotsset{every axis legend/.append style={at={(-0.5,-0.8)},anchor=south},every axis y label/.append style={at={(0.03,0.5)}}}
+	\begin{axis}[xshift=-4cm,title= RMSE RFAnet ,xlabel=Percentage of removed edges, ylabel=RMSE ,xtick =data,legend columns=5,legend style={font=\footnotesize},font=\footnotesize,width=6cm]
 	\addplot table [x=percentage, y=PageRank, col sep=comma] {leave_N_rmse_RFAnet.csv};
 	\addplot table [x=percentage, y=Bias_Deserve, col sep=comma] {leave_N_rmse_RFAnet.csv};
 	\addplot table [x=percentage, y=Fairness_Goodness, col sep=comma] {leave_N_rmse_RFAnet.csv};
@@ -213,7 +210,7 @@ percentage,PageRank,Bias_Deserve,Fairness_Goodness,Reciprocal,Signed_HITS,Status
 	\addplot table [x=percentage, y=Triadic_Status, col sep=comma] {leave_N_rmse_RFAnet.csv};
 	\addplot table [x=percentage, y=Linear_Regression, col sep=comma] {leave_N_rmse_RFAnet.csv};
 	\end{axis}
-	\begin{axis}[xshift=5cm,title= PCC RFAnet ,xlabel=Percentage of removed edges, ylabel=PCC ,xtick =data,legend columns=6,legend style={font=\footnotesize},font=\footnotesize,width=7cm]
+	\begin{axis}[xshift=4cm,title= PCC RFAnet ,xlabel=Percentage of removed edges, ylabel=PCC ,xtick =data,legend columns=5,legend style={font=\footnotesize},font=\footnotesize,width=6cm]
 	\addplot table [x=percentage, y=PageRank, col sep=comma] {leave_N_pcc_RFAnet.csv};
 	\addplot table [x=percentage, y=Bias_Deserve, col sep=comma] {leave_N_pcc_RFAnet.csv};
 	\addplot table [x=percentage, y=Fairness_Goodness, col sep=comma] {leave_N_pcc_RFAnet.csv};
@@ -224,9 +221,11 @@ percentage,PageRank,Bias_Deserve,Fairness_Goodness,Reciprocal,Signed_HITS,Status
 	\addplot table [x=percentage, y=Triadic_Status, col sep=comma] {leave_N_pcc_RFAnet.csv};
 	\addplot table [x=percentage, y=Linear_Regression, col sep=comma] {leave_N_pcc_RFAnet.csv};
 
+	\legend{$$Page Rank, $$Bias Deserve, $$Fairness Goodness, $$Reciprocal, $$Signed HITS, $$Status Theory, $$Triadic Balance, $$Triadic Status, $$Linear Regression}
 	\end{axis}
 	\end{tikzpicture}
 	\caption{RFAnet}
+	\label{figure5}
 \end{figure}
 
 
