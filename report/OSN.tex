@@ -69,17 +69,17 @@
 
 With the rapid development of information technology, social 
 network has become a significant part of modern life. As 
-remarkable number of messages reflecting opinion and attitude 
+huge volumes of messages reflecting opinions and attitudes 
 flowing on the network, social network analysis gradually gains 
-popularity in a wide range of fields including political 
+popularity in a wide range of fields, including political 
 science, social psychology and business analysis. Social 
 network analysis offers a tool to seek for insight through 
-the structure of social networks but is limited by the 
+the structure of social networks, but is limited by its 
 complexity. Users are developing rich relationships through 
 networks while analysis tools are generally reducing the 
 relationships to simple links. To cover the gap between 
 simplicity of network simulation and complexity of real 
-relationships is a remarkable research topic. 
+relationships is an interesting research topic. 
 
 In social network, people show different attitudes towards 
 connection to others. The richness of a social network contains 
@@ -119,7 +119,7 @@ methods. The conclusion is summarized in Section 7.
 
 \section{Related Work}
 \subsection{Edge Sign Prediction in SSNs}
-The very early work in 
+In the early stage, the work in
 SSN mainly based on balance and status. The first of these 
 theories is structural balance theory, which originated in 
 social psychology in the mid-20th-century. As formulated by 
@@ -197,12 +197,12 @@ techniques are implemented and compared with fairness and goodness
 method as benchmark models.
 
 \section{Project Overview}
-In this project, we extensively investigate and experiment methods for edge weight prediction in weighted signed networks. All algorithms are tested and evaluated on published real-world datasets. Moreover, we try our best to improve the performance on some traditional methods. The finished works are summarized as follows:
+In this project, we extensively investigate and experiment methods for edge weight prediction in WSNs. All algorithms are tested and evaluated on published real-world datasets. Moreover, we try our best to improve the performance on some traditional methods. The finished works are summarized as follows:
 
 \begin{enumerate}
-	\item Literature review on OSN and select a topic about predicting weight of edges for weighted signed network.
+	\item Literature review on OSN and select a topic about predicting weight of edges for WSN.
 	
-	\item Investigate the state-of-the-art algorithms \emph{fairness-goodness} in\cite{kumar2016edge} and  studied a common set of baselines for weight prediction.
+	\item Investigated the state-of-the-art algorithms \emph{fairness-goodness} in\cite{kumar2016edge} and  studied a common set of baselines for weight prediction.
 	
 	\item Conducted experiments on each algorithm and reproduce the results mentioned in original paper using real-world dataset.
   
@@ -214,13 +214,13 @@ In this project, we extensively investigate and experiment methods for edge weig
     methods and noticed that fairness and goodness method produces 
     almost the best result. 
 	
-    \item \emph{Experimental 2 -  Removing N \%-out edge prediction}: 
-    When we remove N\% of the edges from the network and try to 
+    \item \emph{Experimental 2 -  Removing $N \%$-out edge prediction}: 
+    When we remove $N\%$ of the edges from the network and try to 
     predict them from each of the individual features, we see 
     that in all cases, fairness and goodness metrics are the best.
   \end{itemize}
   
-  \item  Evaluate results of different methods
+  \item  Evaluated results of different methods and summarized the conclusions of this project.
 	
 \end{enumerate}
 
@@ -255,7 +255,11 @@ discussed in details.
 
 
 \section{Conclusion}
-
+In this project, we extensively investigate and experiment methods for edge weight prediction in WSNs.
+Each algorithm is presented and reproduced on two independent experiments using real-world datasets.
+Through linear combination of existing algorithms, we demonstrate that the linear regression function 
+trained by all features outperforms existing methods for edge weights prediction. We also open-source 
+our benchmark results on github for further research and investigation.
 
 
 \bibliographystyle{unsrt}
