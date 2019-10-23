@@ -341,20 +341,20 @@ Iteration Number, Fairness, Goodness
 \begin{figure}[htbp]
     \centering
     \begin{tikzpicture}
-    %\pgfplotsset{every axis legend/.append style={at={(-0.2,1.5)},anchor=north},every axis y label/.append style={at={(0.03,0.5)}}}
-    \begin{axis}[xshift=-2.5cm,title= Fairness Distribution BTCAlphaNet ,xlabel=$f:$ Fairness score, ylabel=Frac. of vertices with Fairness $f$,xtick ={0,0.2,0.4,0.6,0.8,1},legend columns=5,legend style={font=\footnotesize},font=\footnotesize,width=6cm]
-    \addplot table [x=$f:$ Fairness score, y=Frac. of vertices with Fairness $f$, col sep=comma] {F_distribution_BTCAlphaNet.csv};
+    \pgfplotsset{every axis legend/.append style={at={(-0.2,-0.8)},anchor=south},every axis y label/.append style={at={(0.1,0.5)}}}
+    \begin{axis}[title= Fairness Distribution ,xlabel=$f:$ Fairness score, ylabel=Frac. of vertices with Fairness $f$,xtick ={0,0.2,0.4,0.6,0.8,1},legend columns=5,legend style={font=\tiny},font=\tiny,width=5cm]
+    \addplot [very thick,color=blue,mark=None] table [x=$f:$ Fairness score, y=Frac. of vertices with Fairness $f$, col sep=comma] {F_distribution_BTCAlphaNet.csv};
     \end{axis}
     \end{tikzpicture}
-    \hspace {0.05cm}
     \begin{tikzpicture}
-    \begin{axis}[xshift=-2.5cm,title= Goodness Distribution BTCAlphaNet ,xlabel=$g:$ Goodness score, ylabel=Frac. of vertices with Goodness $g$,xtick ={-1,-0.5,0,0.5,1},legend columns=5,legend style={font=\footnotesize},font=\footnotesize,width=6cm]
-    \addplot table [x=$g:$ Goodness score, y=Frac. of vertices with Goodness $g$, col sep=comma] {G_distribution_BTCAlphaNet.csv};
+    \pgfplotsset{every axis legend/.append style={at={(-0.2,-0.8)},anchor=south},every axis y label/.append style={at={(0.1,0.5)}}}
+    \begin{axis}[title= Goodness Distribution ,xlabel=$g:$ Goodness score, ylabel=Frac. of vertices with Goodness $g$,xtick ={-1,-0.5,0,0.5,1},legend columns=5,legend style={font=\tiny},font=\tiny,width=5cm]
+    \addplot [very thick,color=red,mark=None] table [x=$g:$ Goodness score, y=Frac. of vertices with Goodness $g$, col sep=comma] {G_distribution_BTCAlphaNet.csv};
     \end{axis}
     \end{tikzpicture}
-    \hspace {0.05cm}
     \begin{tikzpicture}
-    \begin{semilogyaxis}[xshift=-2.5cm,title= Residual of BTCAlphaNet ,xlabel=Iteration Number, ylabel=Change in Value,xtick =data,legend columns=5,legend style={font=\footnotesize},font=\footnotesize,width=6cm]
+    \pgfplotsset{every axis legend/.append style={at={(0.7,0.65)},anchor=south},every axis y label/.append style={at={(0.1,0.5)}}}
+    \begin{semilogyaxis}[title= Residual ,xlabel=Iteration Number, ylabel=Change in Value,xtick =data,legend columns=1,legend style={font=\tiny},font=\tiny,width=5cm]
     \addplot table [x=Iteration Number, y=Fairness, col sep=comma] {residual_BTCAlphaNet.csv};
     \addplot table [x=Iteration Number, y=Goodness, col sep=comma] {residual_BTCAlphaNet.csv};
     \legend{$$Fairness, $$Goodness}

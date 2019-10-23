@@ -26,15 +26,17 @@ range of [$-1$, $1$]. An online sentiment engine is used to quantify
 the strength of each score based on the intensity of the sentiment expressed 
 in its explanation.
 
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+
 \begin{table}[htbp]
 \centering
 \caption{Real-world datasets used for evaluation}
   \begin{tabular}{l|c|c|c|c}
   \toprule
   \textbf{Network}& \textbf{Vertices} & \textbf{Edges} & \textbf{Pos. Edges $\%$} & \textbf{Description of network edges} \\ \hline
-  Bitcoin-Alpha         & 3,783 & 24,186 & $93\%$  & Degree of trust or distrust from Bitcoin user $u$ to $v$ \\ \hline
-  Bitcoin-OTC           & 5,881 & 35,592 & $89\%$  & Degree of trust or distrust from Bitcoin user $u$ to $v$ \\ \hline
-  Wikipedia RfA         & 9,654 & 104,554 & $83.7\%$  & Degree of support or opposition in Wikipedia administrator elections by $u$ to $v$ \\ \hline
+  Bitcoin-Alpha         & 3,783 & 24,186 & $93\%$  & \tabincell{c}{Degree of trust or distrust \\ from Bitcoin user $u$ to $v$} \\ \hline
+  Bitcoin-OTC           & 5,881 & 35,592 & $89\%$  & \tabincell{c}{Degree of trust or distrust \\ from Bitcoin user $u$ to $v$} \\ \hline
+  Wikipedia RfA         & 9,654 & 104,554 & $83.7\%$  & \tabincell{c}{Degree of support or opposition \\ in Wikipedia administrator \\elections by $u$ to $v$} \\ \hline
   \end{tabular}
 \end{table}
 

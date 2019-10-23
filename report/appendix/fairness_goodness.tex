@@ -1,6 +1,6 @@
 % !TeX root = ../OSN.tex
 
-\subsection*{A. Fairness and Goodness Distribution}
+\subsection*{B. Fairness and Goodness Distribution}
 
 
 \begin{filecontents*}{F_distribution_BTCAlphaNet.csv}
@@ -235,9 +235,9 @@
   8,0.000664334,0.001409055
   9,0.000195759,0.000410127
   10,5.81E-05,0.000120386
-  11,1.73E-05,3.58E-05
+,1.73E-05,3.58E-05
   12,5.18E-06,1.07E-05
-  13,1.55E-06,3.23E-06
+,1.55E-06,3.23E-06
   14,4.65E-07,9.70E-07
   \end{filecontents*}
   
@@ -255,46 +255,48 @@
   10,7.52E-08,1.77E-07
   \end{filecontents*}
   
-  \begin{figure}[htbp]
+  \begin{figure}[!htbp]
+  \centering
       \begin{tikzpicture}
-      %\pgfplotsset{every axis legend/.append style={at={(-0.2,1.5)},anchor=north},every axis y label/.append style={at={(0.03,0.5)}}}
-      \begin{axis}[name=plot1,xshift=-2.5cm,title= Fairness Distribution OTCNet,xlabel=$f:$ Fairness score, ylabel=Frac. of vertices with Fairness $f$,xtick ={0,0.2,0.4,0.6,0.8,1},legend columns=5,legend style={font=\footnotesize},font=\footnotesize,width=6cm]
-      \addplot table [x=$f:$ Fairness score, y=Frac. of vertices with Fairness $f$, col sep=comma] {F_distribution_OTCNet.csv};
+      \pgfplotsset{every axis legend/.append style={at={(0.7,0.65)},anchor=south},every axis y label/.append style={at={(0.1,0.5)}}}
+      \begin{axis}[name=plot1,xshift=-2.5cm,title= Fairness Distribution,xlabel=$f:$ Fairness score, ylabel=Frac. of vertices with Fairness $f$,xtick ={0,0.2,0.4,0.6,0.8,1},legend columns=5,legend style={font=\tiny},font=\tiny,width=4.5cm]
+      \addplot [very thick,color=blue,mark=None] table [x=$f:$ Fairness score, y=Frac. of vertices with Fairness $f$, col sep=comma] {F_distribution_OTCNet.csv};
       \end{axis}
       \end{tikzpicture}
-      \hspace {0.05cm}
       \begin{tikzpicture}
-      \begin{axis}[xshift=-2.5cm,title= Goodness Distribution OTCNet ,xlabel=$g:$ Goodness score, ylabel=Frac. of vertices with Goodness $g$,xtick ={-1,-0.5,0,0.5,1},legend columns=5,legend style={font=\footnotesize},font=\footnotesize,width=6cm]
-      \addplot table [x=$g:$ Goodness score, y=Frac. of vertices with Goodness $g$, col sep=comma] {G_distribution_OTCNet.csv};
+      \pgfplotsset{every axis legend/.append style={at={(0.7,0.65)},anchor=south},every axis y label/.append style={at={(0.1,0.5)}}}
+      \begin{axis}[xshift=-2.5cm,title= Goodness Distribution ,xlabel=$g:$ Goodness score, ylabel=Frac. of vertices with Goodness $g$,xtick ={-1,-0.5,0,0.5,1},legend columns=5,legend style={font=\tiny},font=\tiny,width=4.5cm]
+      \addplot [very thick,color=red,mark=None] table [x=$g:$ Goodness score, y=Frac. of vertices with Goodness $g$, col sep=comma] {G_distribution_OTCNet.csv};
       \end{axis}
       \end{tikzpicture}
-      \hspace {0.05cm}
       \begin{tikzpicture}
-      \begin{semilogyaxis}[xshift=-2.5cm,title= Residual of OTCNet ,xlabel=Iteration Number, ylabel=Change in Value,xtick =data,legend columns=5,legend style={font=\footnotesize},font=\footnotesize,width=6cm]
+      \pgfplotsset{every axis legend/.append style={at={(0.7,0.65)},anchor=south},every axis y label/.append style={at={(0.1,0.5)}}}
+      \begin{semilogyaxis}[xshift=-2.5cm,title= Residual ,xlabel=Iteration Number, ylabel=Change in Value,xtick =data,legend columns=1,legend style={font=\tiny},font=\tiny,width=4.5cm]
       \addplot table [x=Iteration Number, y=Fairness, col sep=comma] {residual_OTCNet.csv};
       \addplot table [x=Iteration Number, y=Goodness, col sep=comma] {residual_OTCNet.csv};
       \legend{$$Fairness, $$Goodness}
       \end{semilogyaxis}
       \end{tikzpicture}
       \caption{OTCNet}
-  \end{figure}
-
-\begin{figure}[htbp]
+\end{figure}
+\vspace*{-0.5cm}
+\begin{figure}[!htbp]
+\centering
   \begin{tikzpicture}
-  %\pgfplotsset{every axis legend/.append style={at={(-0.2,1.5)},anchor=north},every axis y label/.append style={at={(0.03,0.5)}}}
-  \begin{axis}[xshift=-2.5cm,title= Fairness Distribution RFAnet,xlabel=$f:$ Fairness score, ylabel=Frac. of vertices with Fairness $f$,xtick ={0,0.2,0.4,0.6,0.8,1},legend columns=5,legend style={font=\footnotesize},font=\footnotesize,width=6cm]
-  \addplot table [x=$f:$ Fairness score, y=Frac. of vertices with Fairness $f$, col sep=comma] {F_distribution_RFAnet.csv};
+  \pgfplotsset{every axis legend/.append style={at={(-0.2,-0.8)},anchor=south},every axis y label/.append style={at={(0.1,0.5)}}}
+  \begin{axis}[xshift=-2.5cm,title= Fairness Distribution,xlabel=$f:$ Fairness score, ylabel=Frac. of vertices with Fairness $f$,xtick ={0,0.2,0.4,0.6,0.8,1},legend columns=5,legend style={font=\tiny},font=\tiny,width=4.5cm]
+  \addplot [very thick,color=blue,mark=None] table [x=$f:$ Fairness score, y=Frac. of vertices with Fairness $f$, col sep=comma] {F_distribution_RFAnet.csv};
   \end{axis}
   \end{tikzpicture}
-  \hspace {0.05cm}
   \begin{tikzpicture}
-  \begin{axis}[xshift=-2.5cm,title= Goodness Distribution OTCNet ,xlabel=$g:$ Goodness score, ylabel=Frac. of vertices with Goodness $g$,xtick ={-1,-0.5,0,0.5,1},legend columns=5,legend style={font=\footnotesize},font=\footnotesize,width=6cm]
-  \addplot table [x=$g:$ Goodness score, y=Frac. of vertices with Goodness $g$, col sep=comma] {G_distribution_RFAnet.csv};
+  \pgfplotsset{every axis legend/.append style={at={(-0.2,-0.8)},anchor=south},every axis y label/.append style={at={(0.1,0.5)}}}
+  \begin{axis}[xshift=-2.5cm,title= Goodness Distribution ,xlabel=$g:$ Goodness score, ylabel=Frac. of vertices with Goodness $g$,xtick ={-1,-0.5,0,0.5,1},legend columns=5,legend style={font=\tiny},font=\tiny,width=4.5cm]
+  \addplot [very thick,color=red,mark=None] table [x=$g:$ Goodness score, y=Frac. of vertices with Goodness $g$, col sep=comma] {G_distribution_RFAnet.csv};
   \end{axis}
   \end{tikzpicture}
-  \hspace {0.05cm}
   \begin{tikzpicture}
-  \begin{semilogyaxis}[xshift=-2.5cm,title= Residual of RFAnet ,xlabel=Iteration Number, ylabel=Change in Value, xtick =data,legend columns=5,legend style={font=\footnotesize},font=\footnotesize,width=6cm]
+  \pgfplotsset{every axis legend/.append style={at={(0.7,0.65)},anchor=south},every axis y label/.append style={at={(0.1,0.5)}}}
+  \begin{semilogyaxis}[xshift=-2.5cm,title= Residual ,xlabel=Iteration Number, ylabel=Change in Value, xtick =data,legend columns=1,legend style={font=\tiny},font=\tiny,width=4.5cm]
   \addplot table [x=Iteration Number, y=Fairness, col sep=comma] {residual_RFAnet.csv};
   \addplot table [x=Iteration Number, y=Goodness, col sep=comma] {residual_RFAnet.csv};
   \legend{$$Fairness, $$Goodness}
@@ -302,3 +304,4 @@
   \end{tikzpicture}
   \caption{RFAnet}
 \end{figure}
+

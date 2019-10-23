@@ -4,7 +4,7 @@ We implemented two series of experiments to evaluate the
 performance of fairness and goodness method on three public 
 WSN dataset mentioned above. 
 
-Experiment1:leave-one-out prediction
+\textbf{Experiment1:} leave-one-out prediction
 In these experiments, one weighted edge is removed at a time 
 and nine algorithms are implemented to predict the weight of 
 test edge, simulating the situation where we want to calculate 
@@ -16,7 +16,7 @@ performance among all datasets and showed robustness.
 The linear regression result trained by all other features 
 is the best one. 
 
-Experiment2:leave-N\%-out prediction
+\textbf{Experiment2:}: leave-N\%-out prediction
 In this part, we removed a larger number of edges to further 
 evaluate the performance of F\&G algorithm. We randomly selected 
 N\% of the edges, remove them as test edges and predict their 
@@ -34,6 +34,7 @@ nearly the best in all datasets. We noticed that performance of
 
 \begin{table}[htbp]
 \centering
+\captionsetup{justification=centering,margin=1.8cm}
 \caption{Performance of different algorithms for edge weight prediction in leave-one-out experiment on different datasets. Each cell is (RMSE, PCC). Lower RMSE and higher PCC are better.}
 	\begin{tabular}{l||c|c|c}
 	\toprule
@@ -53,6 +54,7 @@ nearly the best in all datasets. We noticed that performance of
 	\end{tabular}
 	\label{table1}
 \end{table}
+
 
 
 \begin{filecontents*}{leave_N_rmse_BTCAlphaNet.csv}

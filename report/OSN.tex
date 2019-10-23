@@ -106,18 +106,10 @@ prediction\cite{west2014}. Therefore, the prediction of edge
 weights in WSNs can be advantageous in various tasks, both 
 when WSNs are explicit and implicit.
 
-To better understand theories and master practical skills, 
-we investigate and implement a common set of algorithms and 
-evaluate their performance on real-world datasets. 
-The rest of the paper is structured as follows: Section 2 
-presents related work in this topic. Section 3 describes the 
-overview of our project. Section 4 formulates the problem of 
-weight prediction in weighted signed networks. Section 5 
-conducted experiments on real-world datasets using different 
-algorithms. Section 6 evaluates the performance of all tested 
-methods. The conclusion is summarized in Section 7.
+To better understand theories and master practical skills, we investigate and implement a common set of algorithms and evaluate their performance on real-world datasets. The rest of the paper is structured as follows: Section \ref{sec2} presents related work in this topic. Section \ref{sec3} describes the overview of our project. Section \ref{sec4} conducted experiments on real-world datasets using different algorithms. Section \ref{sec5} evaluates the performance of all tested methods. The conclusion is summarized in Section \ref{sec6}.
 
 \section{Related Work}
+\label{sec2}
 \subsection{Edge Sign Prediction in SSNs}
 In the early stage, the work in
 SSN mainly based on balance and status. The first of these 
@@ -197,6 +189,7 @@ techniques are implemented and compared with fairness and goodness
 method as benchmark models.
 
 \section{Project Overview}
+\label{sec3}
 In this project, we extensively investigate and experiment methods for edge weight prediction in WSNs. All algorithms are tested and evaluated on published real-world datasets. Moreover, we try our best to improve the performance on some traditional methods. The finished works are summarized as follows:
 
 \begin{enumerate}
@@ -225,7 +218,7 @@ In this project, we extensively investigate and experiment methods for edge weig
 \end{enumerate}
 
 \section{Algorithms}
-
+\label{sec4}
 In this section, we investigate a common set of algorithms
 associated with signed social networks. The procedures and
 formulas of these algorithms for edge weight prediction are 
@@ -250,11 +243,12 @@ discussed in details.
 \input{algorithms/Linear_regression}
 
 \section{Performance Evaluation}
-
+\label{sec5}
 \input{algorithms/performance_evaluation}
 
 
 \section{Conclusion}
+\label{sec6}
 In this project, we extensively investigate and experiment methods for edge weight prediction in WSNs.
 Each algorithm is presented and reproduced on two independent experiments using real-world datasets.
 Through linear combination of existing algorithms, we demonstrate that the linear regression function 
@@ -269,7 +263,8 @@ our benchmark results on github for further research and investigation.
 \section*{Appendix}
 
 \input{appendix/datasets}
-
 \input{appendix/fairness_goodness}
+
+
 
 \end{document}
