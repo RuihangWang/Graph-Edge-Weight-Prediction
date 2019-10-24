@@ -12,10 +12,10 @@ raters should be considered important. From the description above,
 we can see that the fairness and goodness metrics are dependent on each
 other.
 
-To investigate this method, we first need to understand the defination
-of fairness and goodness from a mathmatical perspective. According to 
+To investigate this method, we first need to understand the definition
+of fairness and goodness from a mathematical perspective. According to 
 the author, the fairness and goodness dependency should satisfy the 
-following definations.
+following definitions.
 
 \emph{\textbf{Goodness defination}}: The goodness axiom states that 
 vertices with higher fairness have higher impact on the vertices they rate.
@@ -45,7 +45,7 @@ iteratively calculated by:
 \end{equation}
 
 where $R=2$\footnote{If edge weights and goodness range over $[-\ell, \ell]$, then $R = 2\ell$},
-$in(v)$ is a set of nodes that preceed $v$, $out(u)$ is 
+$in(v)$ is a set of nodes that precede $v$, $out(u)$ is 
 a set of nodes that succeed $u$, and $W(u,v)$ is the weight
 of ($u,v$). We say that two nodes $u$ and $v$ have the identical
 ego-in-network if $|in(u)| = |in(v)|$, Similarly, the ego-out-network
@@ -70,20 +70,20 @@ Figure 1 shows the fairness and goodness distribution for all
 the vertices in the \textbf{BTCAlphaNet}. We can see that most vertices
 in the network have very high fairness ($90\%$ above 0.8 score; mean score = 0.94)
 meaning that most of the users are fair, but some vertices are not.
-For goodness, most vertices have low positive score ($80\%$ have 
-score between 0 and 0.3), while a considerable fraction are 
-considered ‘not good’ ($14\%$ have negative score, and $5\%$ have 
+For goodness, most vertices have low positive scores ($80\%$ have 
+score between 0 and 0.3), while a considerable fraction is
+considered ‘not good’ ($14\%$ have a negative score, and $5\%$ have 
 goodness below -0.5). Similar observations hold for other 
 networks.
 
-Based on the definations and equations given by the original paper, we reproduce
+Based on the definition and equations given by the original paper, we reproduce
 the edge weight prediction by taking the product of the fairness and
 goodness of each node. Thus, the predicted weight of ($u,v$) is given by:
 \begin{equation}
     W(u,v) = f(u) \times g(v)
 \end{equation}
 where $W(u,v)$ depends on both the fairness $f(u)$ of the edge 
-generator ($u$) and the goodness of the edge recipent ($v$).
+generator ($u$) and the goodness of the edge recipient ($v$).
 
 \begin{filecontents*}{F_distribution_BTCAlphaNet.csv}
 $f:$ Fairness score, Frac. of vertices with Fairness $f$

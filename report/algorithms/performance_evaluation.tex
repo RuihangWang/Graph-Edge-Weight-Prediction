@@ -2,7 +2,7 @@
 
 We implemented two series of experiments to evaluate the 
 performance of fairness and goodness method on three public 
-WSN dataset mentioned above. 
+WSN datasets mentioned above. 
 
 \textbf{Experiment1:} leave-one-out prediction
 In these experiments, one weighted edge is removed at a time 
@@ -20,22 +20,22 @@ is the best one.
 In this part, we removed a larger number of edges to further 
 evaluate the performance of F\&G algorithm. We randomly selected 
 N\% of the edges, remove them as test edges and predict their 
-weight from the rest of network. The value of N range from 10 
+weight from the rest of the network. The value of N range from 10 
 to 90 with a step of 10. Figure\ref{figure3}, Figure\ref{figure4} and 
 Figure\ref{figure5} showed average RMSE and PCC results in 
 the three datasets. F\&G method beats most of the algorithms 
-and linear regression method showed robustness and performed 
-nearly the best in all datasets. We noticed that performance of
- linear regression method showed stability when the percentage 
+and the linear regression method showed robustness and performed 
+nearly the best in all datasets. We noticed that the performance of
+ the linear regression method showed stability when the percentage 
  of removed edges varies, meaning that this method can handle 
- networks partly invisible, especilly online networks 
+ networks partly invisible, especially online networks 
  constrained by privacy items. 
 
 
 \begin{table}[htbp]
 \centering
 \captionsetup{justification=centering,margin=1.8cm}
-\caption{Performance of different algorithms for edge weight prediction in leave-one-out experiment on different datasets. Each cell is (RMSE, PCC). Lower RMSE and higher PCC are better.}
+\caption{Performance of different algorithms for edge weight prediction in leave-one-out experiments on different datasets. Each cell is (RMSE, PCC). Lower RMSE and higher PCC are better.}
 	\begin{tabular}{l||c|c|c}
 	\toprule
 	\textbf{Algorithms}& \textbf{BTCAlphaNet} & \textbf{OTCNet} & \textbf{RFANet}\\ \hline

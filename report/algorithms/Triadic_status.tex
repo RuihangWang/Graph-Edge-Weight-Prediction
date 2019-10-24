@@ -2,7 +2,7 @@
 
 \subsection{Triadic Status}
 
-Imaging there are two nodes named $A$ and $B$, and they are unlinked. What we want to do is to predict the weight of the edge from $A$ to $B$. Suppose that there is another node $X$, and $(A, B, X)$ compose a triangle once $A$ and $B$ are linked. Overall, there are four different triangle-links, as the edge between $X$ and $A$ can go in either direction and similarly for the edge between $X$ and $B$, if the sign of weight is not considered.
+Imagine there are two nodes named $A$ and $B$, and they are unlinked. What we want to do is to predict the weight of the edge from $A$ to $B$. Suppose that there is another node $X$, and $(A, B, X)$ compose a triangle once $A$ and $B$ are linked. Overall, there are four different triangle-links, as the edge between $X$ and $A$ can go in either direction and similarly for the edge between $X$ and $B$, if the sign of weight is not considered.
 
 \begin{figure}[htbp]
 \centering
@@ -71,9 +71,9 @@ And we predict the weight of the edge $(A, B)$ using three rules:
 
 \item In Graph t1, the predicted weight of the transitive edge is the sum of the two non-transitive edge weights.
 
-\item In Graph t2 and t3, the predicted weight of a non-transitive edge is the difference of the transitive and the other non-transitive edge weights. 
+\item In Graph t2 and t3, the predicted weight of a non-transitive edge is the difference between the transitive and the other non-transitive edge weights. 
 
-\item In Graph t4, since it is a cyclic triad, the weight of the missing edge is the negative of the sum of other two edge weights.
+\item In Graph t4, since it is a cyclic triad, the weight of the missing edge is the negative of the sum of the other two edge weights.
 
 \end{enumerate}
 
