@@ -14,7 +14,7 @@ Follow the official instrutions of Anaconda. Once it has been successfully insta
 
 ```
 git clone https://github.com/RuihangWang/CE7490-OSN-Project.git
-cd CE7490-Group-Project-Python
+cd CE7490-OSN-Project
 conda env create -f environment.yml
 ```
 
