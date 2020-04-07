@@ -23,7 +23,7 @@ def main():
 
     # input network
     filename = input('Input dataset:')
-    G = init_Graph(filename, path='../dataset/')
+    G = init_Graph(filename, path='./dataset/')
 
     algorithm_type = ['PageRank', 'Bias_Deserve', 'Fairness_Goodness',
                       'Reciprocal', 'Signed_HITS', 'Status_Theory',

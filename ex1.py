@@ -22,7 +22,7 @@ def main():
     print('Avaliable datset: BTCAlphaNet.csv, OTCNet.csv, RFAnet.csv\n')
 
     filename = input('Input dataset:')
-    G = init_Graph(filename, path='../dataset/')
+    G = init_Graph(filename, path='./dataset/')
 
     # remove edges
     remove_edges = leave_out_edges(G, 1000)
