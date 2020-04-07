@@ -1,7 +1,8 @@
 import random
+import networkx as nx
 from scipy.stats.stats import pearsonr
 from sklearn.metrics import mean_squared_error
-import networkx as nx
+
 
 def leave_out_n(G, n):
     """
@@ -12,14 +13,15 @@ def leave_out_n(G, n):
     """
     G_n = G.copy()
     target = int(len(G.edges()) * (n / 100))
-    all_edges=[]
+    all_edges = []
     for (u, v) in G.edges():
-        all_edges.append((u,v))
-    slice = random.sample(all_edges,len(all_edges))
+        all_edges.append((u, v))
+    slice = random.sample(all_edges, len(all_edges))
     slice = slice[:target]
     G_n.remove_edges_from(slice)
 
-    return  G_n
+    return G_n
+
 
 def leave_out_edges(G, remove_edges_num):
     all_edges = []
@@ -35,9 +37,9 @@ def predict_weight(WSN_method, G, G_n, u_v_edge=None):
     :param WSN_method: class method, for example: Page_Rank
     :param G: original Graph including all edges
     :param G_n: G after removing edges
-    :param u_v_edge: if None, we will predict all removed edges and return the RMSE and PCC values
+    :param u_v_edge: if None, we will predict all removed edges and return the rmse and pcc values
                      if (u,v) is called, we will predict the weight of edge (u,v)
-    :return: if None, we will predict all removed edges and return the RMSE and PCC values
+    :return: if None, we will predict all removed edges and return the rmse and pcc values
             if (u,v) is called, we will predict the weight of edge (u,v)
     """
 
@@ -56,10 +58,11 @@ def predict_weight(WSN_method, G, G_n, u_v_edge=None):
         w_ = WSN_method.cal_w_(u, v)
         total_w.append(w)
         total_w_.append(w_)
-    RMSE = mean_squared_error(total_w, total_w_) ** 0.5
-    PCC = pearsonr(total_w, total_w_)
+    rmse = mean_squared_error(total_w, total_w_) ** 0.5
+    pcc = pearsonr(total_w, total_w_)
 
-    return RMSE, PCC[0]
+    return rmse, pcc[0]
+
 
 def init_Graph(filename, path):
     """
@@ -83,4 +86,3 @@ def init_Graph(filename, path):
     f.close()
 
     return G
-

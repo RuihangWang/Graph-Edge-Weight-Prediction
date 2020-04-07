@@ -38,10 +38,10 @@ The outputs should be {'1': 0.13333340816497807, '2': 0.08840581470882135, '3': 
 The standard way to run the benchmark algorithms from command line is:
 
 ```
-cd exp
 python ex1.py 
 python ex2.py 
 ```
+
 ex1.py is for leaving one edge out prediction of a common set of algorithms.
 
 ex2.py is for leaving N% edge out prediction of a common set of algorithms.
@@ -50,7 +50,7 @@ ex2.py is for leaving N% edge out prediction of a common set of algorithms.
 To plot the results, run the following command:
 
 ```
-cd exp
+cd plot
 python plot.py
 ```
 

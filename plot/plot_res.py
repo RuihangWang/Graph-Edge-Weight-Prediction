@@ -1,6 +1,5 @@
 import pandas as pd
-import numpy as np
-import plotly.graph_objects as go 
+import plotly.graph_objects as go
 
 print("\nPossible results: residual_+'dataset' \n")
 print("e.g. residual_OTCNet.csv")

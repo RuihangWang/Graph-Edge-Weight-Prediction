@@ -3,15 +3,14 @@ from src.bias_deserve import Bias_Deserve
 
 G = nx.DiGraph()
 
-f = open('test.csv',"r")
+f = open('test.csv', "r")
 for l in f:
     ls = l.strip().split(",")
-    G.add_edge(ls[0], ls[1], weight = float(ls[2]))
+    G.add_edge(ls[0], ls[1], weight=float(ls[2]))
 f.close()
 
 BD = Bias_Deserve(G)
 bias, des = BD.compute_bias_des(G)
-
 
 # The test bias and deserve should be:
 #         Node 1   Node 2  Node 3
@@ -24,4 +23,3 @@ in networks based on trust scores,” in WWW, 2011.
 '''
 
 print(bias, des)
-

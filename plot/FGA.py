@@ -1,10 +1,6 @@
-import networkx as nx
 import math
 import csv
-import sys
-import os
-sys.path.append('../src')
-from utils import *
+from src.utils import *
 
 def initialize_scores(G):
     fairness = {}
