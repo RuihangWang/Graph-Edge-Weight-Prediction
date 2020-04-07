@@ -1,6 +1,18 @@
 # Benchmarking Algorithms for Edge Weight Prediction in Weighted Signed Networks
 
-CE7490 2019 Fall - Advanced Topics in Distributed System - Project 1: Online Social Network
+## Introduction
+CE7490 2019 Fall - Advanced Topics in Distributed System - Project 1: Online Social Network. This repository is the implementation of ["Edge Weight Prediction in Weighted Signed
+Networks"](https://cs.stanford.edu/~srijan/wsn/) introduced by Kumar, Srijan, et al., ICDM, 2016.
+
+A list of baseline algorithms can be found in the reference directory, including:
+
+* PageRank
+* Bias and Deserve
+* Reciprocal
+* Signed HITS
+* Status Theory
+* Triadic Balance 
+* Triadic Status 
 
 ## Installation Guide
 Running the experiment requires Python3 with corresponding packages.
@@ -24,7 +36,7 @@ To use Python from the environment you just created, activate the environment wi
 conda activate CE7490-OSN-Project
 ```
 
-### Check Your Install
+### Check Your Installation
 To see if you've successfully activated environment, try to run 'test.py' with
 
 ```
@@ -59,5 +71,5 @@ Example figures of BTCAlphaNet are shown like follows:
 ![result pic](./results/BTCAlphaNet_pcc.png)
 ![result pic](./results/BTCAlphaNet_rmse.png)
 
-## Avaliable dataset
+## Additional Dataset
 The currently avaliable datasets are stored in '../dataset'. Additional datasets can be downloaded from https://cs.stanford.edu/~srijan/wsn/data/data-wsn.zip
