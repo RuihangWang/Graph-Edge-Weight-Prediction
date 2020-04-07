@@ -64,8 +64,8 @@ def main():
     df_rmse = pd.DataFrame(rmse_stack, index=algorithm_type, columns=percentages)
     df_pcc = pd.DataFrame(pcc_stack, index=algorithm_type, columns=percentages)
 
-    df_rmse.to_csv('../results/leave_N_rmse_{}'.format(filename))
-    df_pcc.to_csv('../results/leave_N_pcc_{}'.format(filename))
+    df_rmse.to_csv('./results/leave_N_rmse_{}'.format(filename))
+    df_pcc.to_csv('./results/leave_N_pcc_{}'.format(filename))
 
     print('rmse:', df_rmse)
     print('\npcc:', df_pcc)

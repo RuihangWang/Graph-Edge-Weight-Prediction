@@ -78,8 +78,8 @@ def main():
     df_rmse = pd.DataFrame(rmse_stack, index=algorithm_type, columns=['1'])
     df_pcc = pd.DataFrame(pcc_stack, index=algorithm_type, columns=['1'])
 
-    df_rmse.to_csv('../results/leave_one_rmse_{}'.format(filename))
-    df_pcc.to_csv('../results/leave_one_pcc_{}'.format(filename))
+    df_rmse.to_csv('./results/leave_one_rmse_{}'.format(filename))
+    df_pcc.to_csv('./results/leave_one_pcc_{}'.format(filename))
 
     print('rmse:', df_rmse)
     print('\npcc:', df_pcc)
