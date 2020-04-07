@@ -29,7 +29,7 @@ def main():
                       'Reciprocal', 'Signed_HITS', 'Status_Theory',
                       'Triadic_Balance', 'Triadic_Status', 'Linear_Regression']
 
-    algorithm_list = ['fg', 'pr', 'sh', 'ts', 'lr', 'bd', 'rp', 'st', 'tb']
+    algorithm_list = ['pr', 'bd', 'fg', 'rp', 'sh', 'st', 'tb', 'ts', 'lr']
 
     percentages = list(range(10, 100, 10))
 
