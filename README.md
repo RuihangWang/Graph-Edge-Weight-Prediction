@@ -27,15 +27,22 @@ The project is supported on Linux and MacOS. It may be possible to install on Wi
 Follow the official instrutions of Anaconda. Once it has been successfully installed, run the following command at terminal:
 
 ```
-git clone https://github.com/RuihangWang/CE7490-OSN-Project.git
-cd CE7490-OSN-Project
-conda env create -f environment.yml
+git clone https://github.com/RuihangWang/Graph-Edge-Weight-Prediction.git
+cd Graph-Edge-Weight-Prediction
+conda create -n myenv
 ```
 
-To use Python from the environment you just created, activate the environment with
+To use Python from the environment you just created, activate the environment with:
 
 ```
-conda activate CE7490-OSN-Project
+conda activate myenv
+```
+
+### Requirements
+To install required packages and dependencies, run
+
+```
+pip install -r requirements.txt
 ```
 
 ### Check Your Installation
