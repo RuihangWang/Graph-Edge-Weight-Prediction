@@ -1,7 +1,9 @@
 # Benchmarking Algorithms for Edge Weight Prediction in Weighted Signed Networks
 
+CE7490 2019 Fall - Advanced Topics in Distributed System - Project 1: Online Social Network.
+
 ## Introduction
-CE7490 2019 Fall - Advanced Topics in Distributed System - Project 1: Online Social Network. This repository is the implementation of ["Edge Weight Prediction in Weighted Signed
+This repository is the implementation of ["Edge Weight Prediction in Weighted Signed
 Networks"](https://cs.stanford.edu/~srijan/wsn/) introduced by Kumar, Srijan, et al., ICDM, 2016.
 
 A list of baseline algorithms can be found in the reference directory, including:
