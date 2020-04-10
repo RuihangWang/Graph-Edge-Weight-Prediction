@@ -29,7 +29,7 @@ Follow the official instrutions of Anaconda. Once it has been successfully insta
 ```
 git clone https://github.com/RuihangWang/Graph-Edge-Weight-Prediction.git
 cd Graph-Edge-Weight-Prediction
-conda create -n myenv
+conda create -n myenv python=3.6
 ```
 
 To use Python from the environment you just created, activate the environment with:
